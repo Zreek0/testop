@@ -15,5 +15,5 @@ for name in files:
 		load_plugins(plugin_name.replace(".py", ""))
 
 print("• Successfully Deployed Bot")
-if __name__ = "__main__":
+if __name__ == "__main__":
 	bot.run_until_disconnected()
