@@ -1,5 +1,4 @@
-apischeduler
-wget
+apscheduler
 pyrogram
 telethon
 pyromod
