@@ -89,11 +89,11 @@ async def _(event):
     final_output = (
         f"**✦ Eval : **\n```{cmd}``` \n\n**✦  Result : **\n```{evaluation}``` \n"
     )
-    if len(final_output) > 4095:
-    	with io.BytesIO(str.encode(final_output)) as f:
-    	f.name = "eval.txt"
-    await event.client.send_file(event.chat_id, f, allow_cache=False)
-    await e.delete()
+    if len(final_output) > 4096:
+    	with io.BytesIO(str.encode(final_output)) as file:
+    		file.name = "eval.txt"
+    		await bot.send_file(event.chat_id, file, allow_cache=False)
+    		await e.delete()
     else:
     	await e.edit(final_output, link_preview=True)
     
