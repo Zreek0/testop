@@ -1,5 +1,5 @@
 import glob, logging
-from Pathlib import Path
+from pathlib import Path
 from .loader import load_plugins
 from . import bot
 
