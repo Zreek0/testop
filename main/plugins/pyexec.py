@@ -51,7 +51,7 @@ async def exec_(event):
 
 @bot.on(events.NewMessage(pattern="/eval ?(.*)", from_users=SUDOS))
 async def _(event):
-    e = await event.reply("`Processing...`", reply_to=reply_to)
+    e = await event.reply("`Processing...`")
     cmd = "".join(event.message.message.split(maxsplit=1)[1:])
     if not cmd:
         return await event.reply("`What should i run ?..`")
