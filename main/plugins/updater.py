@@ -6,7 +6,7 @@ from . import *
 
 @bot.on(events.NewMessage(pattern="/update$", from_users=SUDOS))
 async def update_soft(event):
-	e = await event.reply("`Fast Soft Updating...`")
+	e = await event.reply("`Fastly Soft Updating...`")
 	ok, err = await bash("git pull -f && pip install -r requirements.txt")
 	os.execl(sys.executable, "python3", "-m", "main")
 	if err:
