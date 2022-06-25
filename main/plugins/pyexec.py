@@ -90,13 +90,12 @@ async def _(event):
         f"**✦ Eval : **\n```{cmd}``` \n\n**✦  Result : **\n```{evaluation}``` \n"
     )
     if len(final_output) > 4095:
-    	with open("eval.txt", "w") as f:
-    		f.write(str(evaluation))
-    		await event.client.send_file(event.chat_id, f.name, caption=f"**✦ Eval :**\n`{cmd}`" if len(cmd) < 900 else None)
-    		os.remove(f.name)
+    	with io.BytesIO(str.encode(final_output)) as f:
+                f.name = "eval.txt"
+    		await event.client.send_file(event.chat_id, f, allow_cache=False)
     	await e.delete()
     else:
-    	await e.edit(final_output)
+    	await e.edit(final_output, link_preview=True)
     
 async def aexec(code, smessatatus):
     message = event = smessatatus
