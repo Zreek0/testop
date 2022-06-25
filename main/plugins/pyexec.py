@@ -28,7 +28,7 @@ async def bash(cmd, run_code=0):
 @bot.on(events.NewMessage(pattern="/exec ?(.*)", from_users=SUDOS))
 async def exec_(event):
 	e = await event.reply("`Processing...`")
-	cmd = "".join(event.message.message.split(maxsplit=1)[1:])
+	cmd = "".join(event.message.text.split(maxsplit=1)[1:])
 	if not cmd:
             return await e.edit("`Give something to execute`")
 	stdout, stderr = await bash(cmd)
@@ -56,7 +56,7 @@ async def exec_(event):
 @bot.on(events.NewMessage(pattern="/eval ?(.*)", from_users=SUDOS))
 async def _(event):
     e = await event.reply("`Processing...`")
-    cmd = "".join(event.message.message.split(maxsplit=1)[1:])
+    cmd = "".join(event.message.text.split(maxsplit=1)[1:])
     if not cmd:
         return await e.edit("`Give something to excute..`")
     cmd = (
