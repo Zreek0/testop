@@ -91,9 +91,9 @@ async def _(event):
     )
     if len(final_output) > 4095:
     	with io.BytesIO(str.encode(final_output)) as f:
-    	        f.name = "eval.txt"
-    		await event.client.send_file(event.chat_id, f, allow_cache=False)
-    		await e.delete()
+    	f.name = "eval.txt"
+    await event.client.send_file(event.chat_id, f, allow_cache=False)
+    await e.delete()
     else:
     	await e.edit(final_output, link_preview=True)
     
