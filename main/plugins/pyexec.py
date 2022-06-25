@@ -31,6 +31,8 @@ async def exec_(event):
 	cmd = "".join(event.message.message.split(maxsplit=1)[1:])
 	stdout, stderr = await bash(cmd)
 	OUT = f"**✦ Stdin :**\n`{cmd}` \n\n"
+        err = ""
+        out = ""
 	if stderr:
 		err = f"**✦ Stderr :**\n `{stderr}` \n\n"
 	if stdout:
