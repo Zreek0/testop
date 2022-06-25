@@ -7,3 +7,4 @@ FastTelethonhelper
 tgcrypto
 cryptg
 ffmpeg-python
+selenium
