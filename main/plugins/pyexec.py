@@ -92,7 +92,7 @@ async def _(event):
     if len(final_output) > 4095:
     	with open("eval.txt", "w") as f:
     		f.write(str(evaluation))
-    		await event.client.send_file(event.chat_id, f.name, caption=f"**✦ Eval :**\n`{cmd}`")
+    		await event.client.send_file(event.chat_id, f.name, caption=f"**✦ Eval :**\n`{cmd}`" if len(cmd) < 900 else None)
     		os.remove(f.name)
     	await e.delete()
     else:
