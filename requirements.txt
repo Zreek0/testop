@@ -1,0 +1,8 @@
+apischeduler
+wget
+pyrogram
+telethon
+pyromod
+FastTelethonhelper
+tgcrypto
+cryptg
