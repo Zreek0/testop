@@ -30,7 +30,7 @@ async def exec_(event):
 	e = await event.reply("`Processing...`")
 	cmd = "".join(event.message.message.split(maxsplit=1)[1:])
 	if not cmd:
-		return await e.edit("`Give something to execute`")
+            return await e.edit("`Give something to execute`")
 	stdout, stderr = await bash(cmd)
 	OUT = f"**✦ Stdin :**\n`{cmd}` \n\n"
 	err = ""
