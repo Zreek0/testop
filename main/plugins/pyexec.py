@@ -36,11 +36,11 @@ async def exec_(event):
 	err = ""
 	out = ""
 	if stderr:
-		err = f"**✦ Stderr :**\n `{stderr}` \n\n"
+		err = f"**✦ Stderr :**\n`{stderr}` \n\n"
 	if stdout:
-		out = f"**✦ Stdout :**\n `{stdout}` \n\n"
+		out = f"**✦ Stdout :**\n`{stdout}` \n\n"
 	if not stdout and not stderr:
-		out = f"**✦ Stdout :**\n `Success` \n\n"
+		out = f"**✦ Stdout :**\n`Success` \n\n"
 	OUT += err + out
 	if len(OUT) > 4096:
 		td = err + out
