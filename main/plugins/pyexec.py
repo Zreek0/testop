@@ -54,7 +54,7 @@ async def _(event):
     e = await event.reply("`Processing...`")
     cmd = "".join(event.message.message.split(maxsplit=1)[1:])
     if not cmd:
-        return await event.reply("`What should i run ?..`")
+        return await e.edit("`What should i run ?..`")
     cmd = (
         cmd.replace("send_message", "send_message")
         .replace("send_file", "send_file")
@@ -85,7 +85,7 @@ async def _(event):
     final_output = (
         f"**✦ Eval : **\n```{cmd}``` \n\n**✦  Result : **\n```{evaluation}``` \n"
     )
-    await event.reply(final_output)
+    await e.edit(final_output)
     
 async def aexec(code, smessatatus):
     message = event = smessatatus
