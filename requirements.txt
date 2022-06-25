@@ -6,3 +6,4 @@ pyromod
 FastTelethonhelper
 tgcrypto
 cryptg
+ffmpeg-python
