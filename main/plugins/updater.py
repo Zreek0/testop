@@ -1,5 +1,6 @@
 import os, sys
 
+from telethon.sync import events
 from .pyexec import bash
 from . import *
 
