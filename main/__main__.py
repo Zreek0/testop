@@ -4,7 +4,7 @@ from .loader import load_plugins
 from . import bot
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
-                    level=logging.Debug)
+                    level=logging.debug)
 
 path = "./main/plugins/*py"
 files = glob.glob(path)
