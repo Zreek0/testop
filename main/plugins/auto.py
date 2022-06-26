@@ -23,4 +23,5 @@ async def nyaa(event):
 			logs.info(err)
 		os.remove(f"{event.id}.mkv")
 		os.remove(ename)
+                os.remove(thumb)
 			
