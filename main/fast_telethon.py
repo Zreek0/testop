@@ -9,6 +9,7 @@ import os
 from collections import defaultdict
 from typing import Optional, List, AsyncGenerator, Union, Awaitable, DefaultDict, Tuple, BinaryIO
 
+from telethon.tl import types
 from telethon import utils, helpers, TelegramClient
 from telethon.crypto import AuthKey
 from telethon.network import MTProtoSender
@@ -306,3 +307,35 @@ async def upload_file(client: TelegramClient,
                       ) -> TypeInputFile:
     res = (await _internal_transfer_to_telegram(client, file, progress_callback))[0]
     return res
+
+async downloader(client, message, progress=None):
+	if progress:
+		try:
+			f = await download_file(client, message.document, out=open(message.file.name, "wb"), progress_callback=progress)
+		except Exception as e:
+			log.info(e)
+		return f.name
+	else:
+		try:
+			f = await download_file(client, message.document, out=open(message.file.name, "wb"))
+		except Exception as e:
+			log.info(e)
+		return f.name
+
+async def uploader(client, file, progress=None):
+	if progress:
+		try:
+			f = await upload_file(client, open(file, "rb"),  progress_callback=progress)
+			attributes, mime_type = utils.get_attributes(file)
+			media = types.InputMediaUploadedDocument(file=f, mime_type=mime_type, attributes=attributes)
+		except Exception as e:
+			log.info(e)
+		return media
+	else:
+		try:
+			f = await upload_file(client, open(file, "rb"))
+			attributes, mime_type = utils.get_attributes(file)
+			media = types.InputMediaUploadedDocument(file=f, mime_type=mime_type, attributes=attributes)
+		except Exception as e:
+			log.info(e)
+		return media
