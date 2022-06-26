@@ -35,7 +35,7 @@ async def update_schedule():
 	if post != var:
 		addgvar("SCHEDULE_POST", post)
 		msg = await bot.send_message(-1001448819386, post, link_preview=False)
-		if str(msg.id) != pin_msg:
+		if pin_msg:
 			pin_msg = int(pin_msg)
 			addgvar("PINNED_POST", msg.id)
 			pmsg = await bot.get_messages(msg.chat_id, ids=pin_msg)
