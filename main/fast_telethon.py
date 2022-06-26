@@ -308,7 +308,7 @@ async def upload_file(client: TelegramClient,
     res = (await _internal_transfer_to_telegram(client, file, progress_callback))[0]
     return res
 
-async downloader(client, message, progress=None):
+async def downloader(client, message, progress=None):
 	if progress:
 		try:
 			f = await download_file(client, message.document, out=open(message.file.name, "wb"), progress_callback=progress)
