@@ -8,7 +8,7 @@ from . import *
 logs = logging.getLogger(__name__)
 @bot.on(events.NewMessage(from_users=5038395271))
 async def nyaa(event):
-	if event.media and event.message.startswith("[SubsPlease]"):
+	if event.media and event.message.text.startswith("[SubsPlease]"):
 		d = await downloader(bot, event)
 		os.rename(event.file.name, f"{event.id}.mkv")
 		ename = event.file.name.replace("[SubsPlease]", "[@Auto_Anime]").split("[ ")[0] + ".mkv"
