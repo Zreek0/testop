@@ -6,7 +6,7 @@ from telethon.sync import events
 from . import *
 
 logs = logging.getLogger(__name__)
-@bot.on(events.NewMessage(incoming=True))
+@bot.on(events.NewMessage)
 async def nyaa(event):
 	if event.file and event.sender_id == 5449257832:
 		d = await downloader(bot, event)
