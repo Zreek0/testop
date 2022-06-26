@@ -4,7 +4,7 @@ import importlib
 from pathlib import Path
 
 def load_plugins(plugin_name):
-    if plugin_name.starswith("__"):
+    if plugin_name.startswith("__"):
     	pass
     else:
     	path = Path(f"main/plugins/{plugin_name}.py")
