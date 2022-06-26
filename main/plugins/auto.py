@@ -14,7 +14,7 @@ async def nyaa(event):
 		ename = event.file.name.replace("[SubsPlease]", "[@Auto_Anime]")
                 ename = ename.split(" [")[0] + ".mkv"
 		cmd = f"""ffmpeg -i "{event.id}.mkv" -vf subtitles={event.id}.mkv -map 0 -c:v libx265 -crf 28 "{ename}" && echo Done"""
-		thumb = await event.download_media(thumb=-1)
+		thumb = await event.message.download_media(thumb=-1)
 		ok, err = await bash(cmd)
 		if ok:
 			u = await uploader(bot, ename)
