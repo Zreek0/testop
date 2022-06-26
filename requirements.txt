@@ -1,9 +1,7 @@
 apscheduler
-pyrogram
+sqlalchemy
 telethon
-pyromod
 FastTelethonhelper
-tgcrypto
 cryptg
 ffmpeg-python
 selenium
