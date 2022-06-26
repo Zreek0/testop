@@ -2,6 +2,7 @@ apscheduler
 sqlalchemy
 psycopg2
 telethon
+mautrix
 FastTelethonhelper
 cryptg
 ffmpeg-python
