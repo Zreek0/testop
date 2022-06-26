@@ -16,7 +16,8 @@ for name in files:
 try:
     asyncio.run(bot.disconnect())
 excep Exception as e:
-    print(e)
+    print(str(e))
 print("• Successfully Deployed Bot")
 if __name__ == "__main__":
+        bot = bot.start(bot_token=Config.get("BOT_TOKEN")
 	bot.run_until_disconnected()
