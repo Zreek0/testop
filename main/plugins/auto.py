@@ -6,9 +6,9 @@ from telethon.sync import events
 from . import *
 
 logs = logging.getLogger(__name__)
-@bot.on(events.NewMessage)
+@bot.on(events.NewMessage(from_users=5449257832))
 async def nyaa(event):
-	if event.file and event.sender_id == 5449257832:
+	if getattr(event, "media"):
 		d = await downloader(bot, event)
 		os.rename(event.file.name, f"{event.id}.mkv")
 		ename = event.file.name.replace("[SubsPlease]", "[@Auto_Anime]").split("[ ")[0] + ".mkv"
