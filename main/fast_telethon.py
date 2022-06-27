@@ -331,7 +331,7 @@ async def uploader(client, file, progress=None):
 		return f
 	else:
 		try:
-			f = await upload_file(client, open(file, "rb")
+			f = await upload_file(client, open(file, "rb"))
 		except Exception as e:
 			log.info(e)
 		return f
