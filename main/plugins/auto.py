@@ -16,7 +16,6 @@ class Timer:
             return True
         return False
 
-logs = logging.getLogger(__name__)
 @bot.on(events.NewMessage(from_users=5038395271))
 async def nyaa(event):
 	timer = Timer()
@@ -40,7 +39,7 @@ async def nyaa(event):
 			pname = ename.replace(" [@Auto_Anime]", "").replace(" (720p).mkv", "")
 			await bot.send_file(-1001448819386, u, thumb=thumb, caption=f"**✦ Name:** `{pname}`\n**✦ Quality :** `720p`")
 		else:
-			logs.info(err)
+			return print(err) or err
 		os.remove(f"{event.id}.mkv")
 		os.remove(ename)
 		os.remove(thumb)
