@@ -275,9 +275,9 @@ async def _internal_transfer_to_telegram(client: TelegramClient,
         await uploader.upload(bytes(buffer))
     await uploader.finish_upload()
     if is_large:
-        return InputFileBig(file_id, part_count, "upload"), file_size
+        return InputFileBig(file_id, part_count, response.name), file_size
     else:
-        return InputFile(file_id, part_count, "upload", hash_md5.hexdigest()), file_size
+        return InputFile(file_id, part_count, response.name, hash_md5.hexdigest()), file_size
 
 
 async def download_file(client: TelegramClient,
@@ -326,16 +326,12 @@ async def uploader(client, file, progress=None):
 	if progress:
 		try:
 			f = await upload_file(client, open(file, "rb"),  progress_callback=progress)
-			attributes, mime_type = utils.get_attributes(file)
-			media = types.InputMediaUploadedDocument(file=f, mime_type=mime_type, attributes=attributes)
 		except Exception as e:
 			log.info(e)
-		return media
+		return f
 	else:
 		try:
-			f = await upload_file(client, open(file, "rb"))
-			attributes, mime_type = utils.get_attributes(file)
-			media = types.InputMediaUploadedDocument(file=f, mime_type=mime_type, attributes=attributes)
+			f = await upload_file(client, open(file, "rb")
 		except Exception as e:
 			log.info(e)
-		return media
+		return f
