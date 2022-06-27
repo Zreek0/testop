@@ -1,6 +1,6 @@
 import os, shutil, logging
 
-from ..fast_telethon import downloader, uploader
+from ..fast_telethon import download_file, upload_file, uploader
 from .pyexec import bash
 from telethon.sync import events
 from . import *
@@ -9,7 +9,7 @@ logs = logging.getLogger(__name__)
 @bot.on(events.NewMessage(from_users=5038395271))
 async def nyaa(event):
 	if event.media and event.message.text.startswith("[SubsPlease]"):
-		d = await downloader(bot, event)
+		d = await download_file(event.client, event.document, open(event.file.name, "wb"))
 		os.rename(event.file.name, f"{event.id}.mkv")
 		ename = event.file.name.replace("[SubsPlease]", "[@Auto_Anime]")
 		ename = ename.split(" [")[0] + ".mkv"
