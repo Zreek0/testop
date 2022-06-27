@@ -44,5 +44,5 @@ async def update_schedule():
 		await msg.pin()
 		
 scheduler = AsyncIOScheduler()
-scheduler.add_job(update_schedule, "interval", minutes=40)
+scheduler.add_job(update_schedule, "interval", minutes=30)
 scheduler.start()
