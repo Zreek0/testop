@@ -3,7 +3,7 @@ from pathlib import Path
 from .loader import load_plugins
 from . import bot
 
-logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
+LOG = logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.INFO)
 
 path = "./main/plugins/*py"
@@ -13,6 +13,6 @@ for name in files:
 		p = Path(f.name)
 		plugin_name = p.stem
 		load_plugins(plugin_name.replace(".py", ""))
-print("• Successfully Deployed Bot")
+LOG.info("✦ Successfully Deployed Bot")
 if __name__ == "__main__":
 	bot.run_until_disconnected()
