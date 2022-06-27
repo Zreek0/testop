@@ -1,4 +1,4 @@
-import os, shutil, logging, tim
+import os, shutil, logging, time
 
 from ..fast_telethon import download_file, upload_file, uploader
 from .pyexec import bash
