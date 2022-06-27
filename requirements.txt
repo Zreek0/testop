@@ -3,8 +3,7 @@ sqlalchemy
 psycopg2
 telethon
 mautrix
-FastTelethonhelper
-cryptg
+pyaesni
 ffmpeg-python
 selenium
 python-dotenv
