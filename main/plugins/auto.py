@@ -35,7 +35,7 @@ async def nyaa(event):
 		if ok:
 			u = await upload_file(event.client, open(ename, "rb"), progress_callback=progress_bar)
 			pname = ename.replace("[@Ongoing_Anime_Uploads] ", "").replace(" (720p).mp4", "")
-			await bot.send_file(-1001448819386, u, thumb=thumb, caption=f"**✦ Name:** `{pname}`\n**✦ Quality :** `720p`", supports_streaming=True)
+			await bot.send_file(-1001448819386, u, thumb=thumb, caption=f"**✦ Name :** `{pname}`\n**✦ Quality :** `720p`", supports_streaming=True)
 		else:
 			logging.getLogger(__name__).info(err)
 		os.remove(f"{event.id}.mkv")
