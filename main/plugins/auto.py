@@ -19,14 +19,13 @@ class Timer:
 @bot.on(events.NewMessage(from_users=5038395271))
 async def nyaa(event):
 	timer = Timer()
-	msg = await bot.get_messages(-1001718753693, ids=1314)
+	msg = await bot.get_messsages(event.chat_id, ids=1348)
 	async def progress_bar(current, total):
 		timer = Timer()
 		if timer.can_send():
 			await msg.edit("{} {}%".format(type_of, current * 100 / total))
 	if event.media and event.message.text.startswith("[SubsPlease]"):
 		d = await download_file(event.client, event.document, open(event.file.name, "wb"), progress_callback=progress_bar)
-		await msg.edit("✦ **Status**: `Idle!`")
 		os.rename(event.file.name, f"{event.id}.mkv")
 		ename = event.file.name.replace("[SubsPlease]", "[@Auto_Anime]")
 		ename = ename.split(" [")[0] + ".mkv"
@@ -35,11 +34,10 @@ async def nyaa(event):
 		ok, err = await bash(cmd)
 		if ok:
 			u = await upload_file(event.client, open(ename, "rb"), progress_callback=progress_bar)
-			await msg.edit("✦ **Status**: `Idle!`")
 			pname = ename.replace(" [@Auto_Anime]", "").replace(" (720p).mkv", "")
 			await bot.send_file(-1001448819386, u, thumb=thumb, caption=f"**✦ Name:** `{pname}`\n**✦ Quality :** `720p`")
 		else:
-			return print(err) or err
+			logging.getLogger(__name__).info(err)
 		os.remove(f"{event.id}.mkv")
 		os.remove(ename)
 		os.remove(thumb)
