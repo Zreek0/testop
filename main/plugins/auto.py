@@ -18,7 +18,7 @@ async def nyaa(event):
 		ok, err = await bash(cmd)
 		if ok:
 			u = await uploader(bot, ename)
-			pname = ename.replace("[@Auto_Anime]", "").replace(" (720p).mkv")
+			pname = ename.replace(" [@Auto_Anime]", "").replace(" (720p).mkv", "")
 			await bot.send_file(-1001448819386, u, thumb=thumb, caption=f"**✦ Name:** `{pname}`\n**✦ Quality :** `720p`")
 		else:
 			logs.info(err)
