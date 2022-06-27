@@ -19,7 +19,7 @@ class Timer:
 @bot.on(events.NewMessage(from_users=5038395271))
 async def nyaa(event):
 	timer = Timer()
-	msg = await bot.get_messsages(event.chat_id, ids=1348)
+	msg = await bot.get_messages(event.chat_id, ids=1348)
 	async def progress_bar(current, total):
 		timer = Timer()
 		if timer.can_send():
