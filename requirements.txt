@@ -3,7 +3,7 @@ sqlalchemy
 psycopg2
 telethon
 mautrix
-pyaesni
+cryptg
 ffmpeg-python
 selenium
 python-dotenv
