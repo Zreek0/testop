@@ -5,6 +5,7 @@ from .pyexec import bash
 from telethon.sync import events
 import logging
 from . import *
+from ..sql.globals import gvarstatus
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from telethon.tl import types
 
