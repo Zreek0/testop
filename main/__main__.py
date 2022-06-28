@@ -1,7 +1,7 @@
 import glob, logging, asyncio
 from pathlib import Path
 from .loader import load_plugins
-from . import bot
+from . import bot, client
 
 logging.basicConfig(format='[%(levelname) 5s/%(asctime)s] %(name)s: %(message)s',
                     level=logging.INFO)
@@ -15,4 +15,6 @@ for name in files:
 		load_plugins(plugin_name.replace(".py", ""))
 logging.getLogger(__name__).info("✦ Successfully Deployed Bot")
 if __name__ == "__main__":
-	bot.run_until_disconnected()
+	client.start()
+	client.tgbot
+	client.run_until_disconected()
