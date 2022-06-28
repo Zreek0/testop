@@ -3,9 +3,13 @@ import os, shutil, logging, time
 from ..fast_telethon import download_file, upload_file, uploader
 from .pyexec import bash
 from telethon.sync import events
+import logging
 from . import *
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from telethon.tl import types
+
+logger = logging.getLogger('simple_example')
+logger.setLevel(logging.DEBUG)
 
 class Timer:
     def __init__(self, time_between=2):
@@ -51,6 +55,7 @@ async def auto_anime():
 		addgvar("ANIME_POST", m.text)
 		await m.forward_to(m.chat_id)
 		await handle_subsplease(m)
+
 
 scheduler = AsyncIOScheduler()
 scheduler.add_job(auto_anime, "interval", minutes=1)
