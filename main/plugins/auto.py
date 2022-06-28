@@ -29,7 +29,7 @@ async def nyaa(event):
 		os.rename(event.file.name, f"{event.id}.mkv")
 		ename = event.file.name.replace("[SubsPlease]", "[@Ongoing_Seasonal_Anime]")
 		ename = ename.split(" [")[0] + ".mp4"
-		cmd = f"""ffmpeg -i "{event.id}.mkv" -vf subtitles={event.id}.mkv -map 0:v -map 0:a -c:v libx264 -crf 28 "{ename}" && echo Done"""
+		cmd = f"""ffmpeg -i "{event.id}.mkv" -vf subtitles={event.id}.mkv -map 0:v -map 0:a -c:v libx264 -map 0:s -c:s mov_text -crf 28 "{ename}" && echo Done"""
 		thumb = await event.message.download_media(thumb=-1)
 		ok, err = await bash(cmd)
 		if ok:
