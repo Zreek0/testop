@@ -51,7 +51,7 @@ async def handle_subsplease(event):
 
 async def auto_anime():
 	post = gvarstatus("ANIME_POST")
-	m = await client.get_messages(-1001718753693, filter=types.InputMessagesFilterDocument, limit=1)
+	m = await zreek.get_messages(-1001718753693, filter=types.InputMessagesFilterDocument, limit=1)
 	m = m[0]
 	if m.text and m.text.startswith("[SubsPlease]") and m.text != post:
 		addgvar("ANIME_POST", m.text)
