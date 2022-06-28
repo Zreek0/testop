@@ -15,6 +15,6 @@ for name in files:
 		load_plugins(plugin_name.replace(".py", ""))
 logging.getLogger(__name__).info("✦ Successfully Deployed Bot")
 if __name__ == "__main__":
-	client.start()
-	client.tgbot = bot
-	client.run_until_disconnected()
+	zreek.start()
+	zreek.tgbot = bot
+	zreek.run_until_disconnected()
