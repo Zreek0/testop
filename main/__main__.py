@@ -16,5 +16,5 @@ for name in files:
 logging.getLogger(__name__).info("✦ Successfully Deployed Bot")
 if __name__ == "__main__":
 	client.start()
-	client.tgbot
+	client.tgbot = bot
 	client.run_until_disconected()
