@@ -4,6 +4,20 @@ from ..fast_telethon import download_file, upload_file, uploader
 from .pyexec import bash
 from telethon.sync import events
 from . import *
+from apscheduler.schedulers.asyncio import AsyncIOScheduler
+from telethon.tl import types
+
+async def forward_anime():
+	post = gvarstatus("ANIME_POST")
+	m = await client.get_messages(-1001718753693, filter=types.InputMessagesFilterDocument, limit=1)
+	m = m[0]
+	if m.text and m.text.startswith("[SubsPlease]") and m.text != post:
+		addgvar("ANIME_POST", m.text)
+		await m.forward_to(m.chat_id)
+
+scheduler = AsyncIOScheduler()
+scheduler.add_job(forward_anime, "interval", minutes=1)
+scheduler.start()
 
 class Timer:
     def __init__(self, time_between=2):
@@ -24,7 +38,7 @@ async def nyaa(event):
 		timer = Timer()
 		if timer.can_send():
 			await msg.edit("{} {}%".format(type_of, current * 100 / total))
-	if event.media and event.message.text.startswith("[SubsPlease]"):
+	if event.file and event.message.text.startswith("[SubsPlease]"):
 		d = await download_file(event.client, event.document, open(event.file.name, "wb"), progress_callback=progress_bar)
 		os.rename(event.file.name, f"{event.id}.mkv")
 		ename = event.file.name.replace("[SubsPlease]", "[@Ongoing_Seasonal_Anime]")
@@ -35,7 +49,7 @@ async def nyaa(event):
 		if ok:
 			u = await upload_file(event.client, open(ename, "rb"), progress_callback=progress_bar)
 			pname = ename.replace("[@Ongoing_Seasonal_Anime] ", "").replace(" (720p).mp4", "")
-			await bot.send_file(-1001448819386, u, thumb=thumb, caption=f"**{pname}**\n\n**✦ Audio :** `Japanese`\n**✦ Subtitles :** `English`\n**✦ Quality :** `720p x264`", supports_streaming=True)
+			await bot.send_file(-1001448819386, u, thumb=thumb, caption=f"**{pname}**\n\n**✦ Audio :** `Japanese`\n**✦ Subtitles :** `English`\n**✦ Quality :** `720p`", supports_streaming=True)
 		else:
 			logging.getLogger(__name__).info(err)
 		os.remove(f"{event.id}.mkv")
