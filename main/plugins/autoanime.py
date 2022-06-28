@@ -8,7 +8,7 @@ from . import *
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from telethon.tl import types
 
-logger = logging.getLogger('simple_example')
+logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 
 class Timer:
