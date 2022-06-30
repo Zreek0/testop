@@ -2,6 +2,7 @@ import os
 import time
 import requests
 from .uws import *
+from telethon.sync import events
 from ..fast_telethon import upload_file
 from . import *
 import cloudscraper
