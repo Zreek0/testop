@@ -11,3 +11,4 @@ bs4
 requests
 cloudscraper
 img2pdf
+pillow
