@@ -18,7 +18,7 @@ def get_link(link, cloud=None):
 		r.raise_for_status()
 	return r.url
 
-@bot.on(events.NewMessage(pattern="read (-h|-mc|-mh|-ws|-m|-18|-t|-20) ?(.*)", from_users=SUDOS))
+@bot.on(events.NewMessage(pattern="/read (-h|-mc|-mh|-ws|-m|-18|-t|-20) ?(.*)", from_users=SUDOS))
 async def readpornhwa(event):
 	site = event.pattern_match.group(1).strip()
 	input_str = event.pattern_match.group(2)
