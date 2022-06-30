@@ -8,3 +8,6 @@ ffmpeg-python
 selenium
 python-dotenv
 bs4
+requests
+cloudscraper
+img2pdf
