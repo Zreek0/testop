@@ -2,6 +2,7 @@ import re
 import os
 import time
 from . import *
+from .mid import gvarstatus
 from .pyexec import bash
 from bs4 import BeautifulSoup
 import shutil
@@ -9,6 +10,22 @@ import requests
 import cloudscraper
 import img2pdf
 request = requests.Session()
+
+def get_ids():
+	ids = list()
+	for i in range(2, int(gvarstatus("MID"))):
+		ids.append(i)
+	return ids
+
+async def get_names():
+	ids = get_ids()
+	mess = await bot.get_messages(-1001606385356, ids=ids)
+	names = []
+	for m in mess:
+		if m and m.photo and m.text and "releasing" in m.message.lower():
+			name = m.message.split("\n")[0].split(" | ")[0]
+			names.append(name)
+	return names
 
 async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src"):
 	chno = str(chapter)
