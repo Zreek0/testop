@@ -8,7 +8,7 @@ ids = get_ids()
 async def getplist(event):
 	e = await bot.send_message(event.chat_id, "`Processing...`", reply_to=event.id)
 	input_str = event.pattern_match.group(1)
-	mess = await bot.get_messages(-1001606385356, ids=ids)
+	mess = await bot.get_messages("adult_mangas", ids=ids)
 	post = str()
 	n = 0
 	for m in mess:
