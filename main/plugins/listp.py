@@ -15,7 +15,7 @@ async def getplist(event):
 		if m and m.photo and m.text and "releasing" in m.message.lower():
 			name = m.message.split("\n")[0].split(" | ")[0]
 			links = re.findall("[^.]ttps://t.me/.*", m.text)[0].replace(")", "")
-			link = links.replace(" [New Link]", "")
+			link = links.replace("[New Link]", "")
 			if input_str in ["-c", "--channel"]:
 				post += f"➤ [{name}]({link})\n"
 			else:
