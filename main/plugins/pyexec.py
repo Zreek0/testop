@@ -25,6 +25,21 @@ async def bash(cmd, run_code=0):
             return out, f"{split.upper()}_NOT_FOUND"
     return out, err
 
+async def aexec(code, smessatatus):
+    message = event = smessatatus
+    p = lambda _x: print(_format.yaml_format(_x))
+    reply = await event.get_reply_message()
+    exec(
+        (
+            "async def __aexec(message, event , reply, client, p, chat): "
+            + "".join(f"\n {l}" for l in code.split("\n"))
+        )
+    )
+    return await locals()["__aexec"](
+        message, event, reply, message.client, p, message.chat_id
+    )
+    
+
 @bot.on(events.NewMessage(pattern="/exec ?(.*)", from_users=SUDOS))
 async def exec_(event):
 	e = await bot.send_message(event.chat_id, "`Processing...`", reply_to=event.id)
@@ -96,18 +111,3 @@ async def _(event):
     		await e.delete()
     else:
     	await e.edit(final_output, link_preview=True)
-    
-async def aexec(code, smessatatus):
-    message = event = smessatatus
-    p = lambda _x: print(_format.yaml_format(_x))
-    reply = await event.get_reply_message()
-    exec(
-        (
-            "async def __aexec(message, event , reply, client, p, chat): "
-            + "".join(f"\n {l}" for l in code.split("\n"))
-        )
-    )
-    return await locals()["__aexec"](
-        message, event, reply, message.client, p, message.chat_id
-    )
-    
