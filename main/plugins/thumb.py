@@ -2,7 +2,7 @@ import os
 from . import *
 from telethon import events
 
-@bot.on(events.NewMessage("/thumbnail ?(.*)", from_users=SUDOS))
+@bot.on(events.NewMessage(pattern="/thumbnail ?(.*)", from_users=SUDOS))
 async def _thumb(event):
 	r = await event.get_reply_message()
 	if r.photo:
