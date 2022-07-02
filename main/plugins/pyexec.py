@@ -3,7 +3,7 @@ import io
 import os
 import sys
 import traceback
-from telethon.sync import events
+from telethon import events
 
 from config import Config
 from . import *
