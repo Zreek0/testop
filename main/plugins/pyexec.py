@@ -68,16 +68,16 @@ async def evaluate_(event):
     		await e.delete()
     else:
     	await e.edit(final_output, link_preview=True)
-async def aexec(code, smessatatus):
-    message = event = smessatatus
-    p = lambda _x: print(_format.yaml_format(_x))
-    reply = await event.get_reply_message()
+async def aexec(code, event):
     exec(
         (
-            "async def __aexec(message, event , reply, client, p, chat): "
-            + "".join(f"\n {l}" for l in code.split("\n"))
+            "async def __aexec(e, client): "
+            + "\n print = p = _stringify"
+            + "\n message = event = e"
+            + "\n reply = await event.get_reply_message()"
+            + "\n chat = event.chat_id"
         )
+        + "".join(f"\n {l}" for l in code.split("\n"))
     )
-    return await locals()["__aexec"](
-        message, event, reply, message.client, p, message.chat_id
-    )
+
+    return await locals()["__aexec"](event, event.client)
