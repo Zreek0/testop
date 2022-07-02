@@ -3,11 +3,12 @@ from . import *
 from telethon import events
 from .uws import get_ids
 
+ids = get_ids()
 @bot.on(events.NewMessage(pattern="/listp ?(.*)", from_users=SUDOS))
 async def getplist(event):
 	e = await bot.send_message(event.chat_id, "`Processing...`", reply_to=event.id)
 	input_str = event.pattern_match.group(1)
-	mess = await bot.get_messages(-1001606385356, ids=get_ids())
+	mess = await bot.get_messages(-1001606385356, ids=ids)
 	post = str()
 	n = 0
 	for m in mess:
