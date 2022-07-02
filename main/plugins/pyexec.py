@@ -25,7 +25,7 @@ async def bash(cmd, run_code=0):
             return out, f"{split.upper()}_NOT_FOUND"
     return out, err
 
-@bot.on(events.NewMessage(pattern="/eval ?(.*)", from_users=SUDOS))
+@bot.on(events.NewMessage(pattern="/py ?(.*)", from_users=SUDOS))
 async def evaluate(event):
     e = await bot.send_message(event.chat_id, "`Processing...`", reply_to=event.id)
     cmd = "".join(event.message.text.split(maxsplit=1)[1:])
