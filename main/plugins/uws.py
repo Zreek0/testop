@@ -19,7 +19,7 @@ def get_ids():
 
 async def get_names():
 	ids = get_ids()
-	mess = await bot.get_messages(-1001606385356, ids=ids)
+	mess = await bot.get_messages("adult_mangas", ids=ids)
 	names = []
 	for m in mess:
 		if m and m.photo and m.text and "releasing" in m.message.lower():
