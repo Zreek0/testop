@@ -1,6 +1,6 @@
 FROM python
 
-COPY . .
+COPY requirements.txt .
 
 ENV TZ=Asia/Kolkata
 
@@ -9,6 +9,6 @@ RUN apt update -y && apt upgrade -y
 RUN apt install -y --no-install-recommends python3 python3-pip python3-selenium chromium-driver
 RUN pip install --no-cache-dir -r requirements.txt
 
-WORKDIR .
+COPY start.sh .
 
-CMD python -m main
+CMD bash start.sh
