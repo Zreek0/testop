@@ -1,8 +1,9 @@
 import re
 from . import *
+from telethon import events
 from .uws import get_ids
 
-@bot.on(event.NewMessage(pattern="/listp ?(.*)", from_users=SUDOS))
+@bot.on(events.NewMessage(pattern="/listp ?(.*)", from_users=SUDOS))
 async def getplist(event):
 	e = await bot.send_message(event.chat_id, "`Processing...`", reply_to=event.id)
 	input_str = event.pattern_match.group(1)
