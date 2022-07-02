@@ -25,49 +25,6 @@ async def bash(cmd, run_code=0):
             return out, f"{split.upper()}_NOT_FOUND"
     return out, err
 
-async def aexec(code, smessatatus):
-    message = event = smessatatus
-    p = lambda _x: print(_format.yaml_format(_x))
-    reply = await event.get_reply_message()
-    exec(
-        (
-            "async def __aexec(message, event , reply, client, p, chat): "
-            + "".join(f"\n {l}" for l in code.split("\n"))
-        )
-    )
-    return await locals()["__aexec"](
-        message, event, reply, message.client, p, message.chat_id
-    )
-    
-
-@bot.on(events.NewMessage(pattern="/exec ?(.*)", from_users=SUDOS))
-async def exec_(event):
-	e = await bot.send_message(event.chat_id, "`Processing...`", reply_to=event.id)
-	cmd = "".join(event.message.text.split(maxsplit=1)[1:])
-	if not cmd:
-            return await e.edit("`Give something to execute`")
-	stdout, stderr = await bash(cmd)
-	OUT = f"**✦ Stdin :**\n`{cmd}` \n\n"
-	err = ""
-	out = ""
-	if stderr:
-		err = f"**✦ Stderr :**\n`{stderr}` \n\n"
-	if stdout:
-		out = f"**✦ Stdout :**\n`{stdout}` \n\n"
-	if not stdout and not stderr:
-		out = f"**✦ Stdout :**\n`Success` \n\n"
-	OUT += err + out
-	if len(OUT) > 4096:
-		td = err + out
-		with io.BytesIO(str.encode(td)) as f:
-			f.name = "exec.txt"
-			await event.client.send_file(event.chat_id, f, allow_cache=False, caption=f"`{cmd}`" if len(cmd) < 998 else None)
-			await e.delete()
-	else:
-		await e.edit(OUT, link_preview=True)
-		
-		
-
 @bot.on(events.NewMessage(pattern="/eval ?(.*)", from_users=SUDOS))
 async def _(event):
     e = await bot.send_message(event.chat_id, "`Processing...`", reply_to=event.id)
@@ -111,3 +68,16 @@ async def _(event):
     		await e.delete()
     else:
     	await e.edit(final_output, link_preview=True)
+async def aexec(code, smessatatus):
+    message = event = smessatatus
+    p = lambda _x: print(_format.yaml_format(_x))
+    reply = await event.get_reply_message()
+    exec(
+        (
+            "async def __aexec(message, event , reply, client, p, chat): "
+            + "".join(f"\n {l}" for l in code.split("\n"))
+        )
+    )
+    return await locals()["__aexec"](
+        message, event, reply, message.client, p, message.chat_id
+    )
