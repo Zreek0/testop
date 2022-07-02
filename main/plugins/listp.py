@@ -21,4 +21,4 @@ async def getplist(event):
 			else:
 				n += 1
 				post += f"{n-1}.] [{name}]({link})\n"
-	await e.edit(post, link_preview=True)
+	await e.edit(post, link_preview=False)
