@@ -1,4 +1,4 @@
-cd /
+cd /app
 rm -rf userbot
 git clone https://github.com/Zreek0/testop userbot
 cd userbot
