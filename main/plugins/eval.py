@@ -29,7 +29,9 @@ def _stringify(text=None, *args, **kwargs):
 async def _(event):
     if event.fwd_from:
         return
-    await eor(event, "Processing ...")
+    if not event.text:
+        return await eod(event, "`Give something to execute...`")
+    await eor(event, "`Processing ...`")
     cmd = event.text.split(" ", maxsplit=1)[1]
     reply_to_id = event.message.id
     if event.reply_to_msg_id:
