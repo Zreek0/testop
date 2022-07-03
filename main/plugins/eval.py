@@ -25,11 +25,11 @@ def _stringify(text=None, *args, **kwargs):
         text = _parse_eval(text)
     return print(text, *args, **kwargs)
 
-@bot.on(admin_cmd("eval", allow_sudo=True))
+@bot.on(admin_cmd("eval ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    if not event.text:
+    if not event.pattern_match.group(1):
         return await eod(event, "`Give something to execute...`")
     e = await eor(event, "`Processing ...`")
     cmd = event.text.split(" ", maxsplit=1)[1]
