@@ -31,7 +31,7 @@ async def _(event):
         return
     if not event.text:
         return await eod(event, "`Give something to execute...`")
-    await eor(event, "`Processing ...`")
+    event = await eor(event, "`Processing ...`")
     cmd = event.text.split(" ", maxsplit=1)[1]
     reply_to_id = event.message.id
     if event.reply_to_msg_id:
@@ -73,7 +73,7 @@ async def _(event):
                 out_file,
                 force_document=True,
                 allow_cache=False,
-                caption=cmd,
+                caption=f"```{cmd}```" if len(cmd) < 998 else None,
                 reply_to=reply_to_id,
             )
             await event.delete()
