@@ -6,6 +6,11 @@ import sys
 import io
 from . import *
 
+def _stringify(text=None, *args, **kwargs):
+    if text:
+        text = _parse_eval(text)
+    return print(text, *args, **kwargs)
+
 @bot.on(admin_cmd("eval", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
@@ -58,3 +63,16 @@ async def _(event):
             await event.delete()
     else:
         await eor(event, final_output)
+async def aexec(code, event):
+    exec(
+        (
+            "async def __aexec(e, client): "
+            + "\n print = p = _stringify"
+            + "\n message = event = e"
+            + "\n reply = await event.get_reply_message()"
+            + "\n chat = event.chat_id"
+        )
+        + "".join(f"\n {l}" for l in code.split("\n"))
+    )
+
+    return await locals()["__aexec"](event, event.client)
