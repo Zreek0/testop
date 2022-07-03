@@ -3,7 +3,6 @@ import os
 import time
 from . import *
 from .mid import gvarstatus
-from .pyexec import bash
 from bs4 import BeautifulSoup
 import shutil
 import requests
