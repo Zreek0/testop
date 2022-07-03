@@ -4,6 +4,7 @@ import inspect, re, asyncio, time, sys, os
 from pathlib import Path
 from telethon import events
 from asyncio import sleep
+from ..fast_telethon import uploader, downloader
 
 from telethon.errors import MessageDeleteForbiddenError, MessageNotModifiedError
 from telethon.tl.custom import Message
