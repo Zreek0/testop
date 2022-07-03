@@ -1,6 +1,6 @@
 apscheduler
 sqlalchemy
-psycopg2
+psycopg2-binary
 telethon
 mautrix
 cryptg
