@@ -3,7 +3,6 @@ import time
 import requests
 from .uws import *
 from telethon.sync import events
-from ..fast_telethon import upload_file
 from . import *
 import cloudscraper
 import asyncio
@@ -23,7 +22,7 @@ async def readpornhwa(event):
 	site = event.pattern_match.group(1).strip()
 	input_str = event.pattern_match.group(2)
 	splited = input_str.split(" | ")
-	mess = await bot.send_message(event.chat_id, "`Processing...`", reply_to=event.id)
+	mess = await eor(event, "`Processing...`")
 	if input_str and len(splited) == 2:
 		name = splited[0]
 		ch = splited[1]
@@ -53,17 +52,15 @@ async def readpornhwa(event):
 			src = "data-src"
 		try:
 			pdfname = await post_ws(link, name.title(), ch, class_=class_, src=src)
-			xx = await upload_file(bot, open(pdfname, "rb"))
+			xx = await uploader(pdfname, pdfname, time.time(), mess, "")
 			await event.client.send_file(event.chat_id, xx)
 			os.remove(pdfname)
-			await mess.edit(f"Sucessfully uploaded `{name.title()} - Chapter {ch}` from [here]({link})")
+			await eod(mess, f"Sucessfully uploaded `{name.title()} - Chapter {ch}` from [here]({link})")
 		except Exception as e:
-			await mess.edit(f"**Error :** `{e}`")
+			await eod(mess, f"**Error :** `{e}`")
 			pass
 	elif not input_str or len(splited) < 2:
-		await mess.edit("`Sorry, invalid syntax.`")
-	await asyncio.sleep(10)
-	await mess.delete()
+		await eod(mess, "`Sorry, invalid syntax.`")
 		
 		
 			
