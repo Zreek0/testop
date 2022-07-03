@@ -1,6 +1,6 @@
 from main import *
 
-import inspect
+import inspect, re
 from pathlib import Path
 from telethon import events
 from asyncio import sleep
