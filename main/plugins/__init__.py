@@ -1,6 +1,6 @@
 from main import *
 
-import inspect, re
+import inspect, re, asyncio, time, sys, os
 from pathlib import Path
 from telethon import events
 from asyncio import sleep
@@ -8,6 +8,23 @@ from asyncio import sleep
 from telethon.errors import MessageDeleteForbiddenError, MessageNotModifiedError
 from telethon.tl.custom import Message
 from telethon.tl.types import MessageService
+
+async def bash(cmd, run_code=0):
+    """
+    run any command in subprocess and get output or error."""
+    process = await asyncio.create_subprocess_shell(
+        cmd,
+        stdout=asyncio.subprocess.PIPE,
+        stderr=asyncio.subprocess.PIPE,
+    )
+    stdout, stderr = await process.communicate()
+    err = stderr.decode().strip() or None
+    out = stdout.decode().strip()
+    if not run_code and err:
+        split = cmd.split()[0]
+        if f"{split}: not found" in err:
+            return out, f"{split.upper()}_NOT_FOUND"
+    return out, err
 
 def admin_cmd(pattern=None, command=None, **args):
     args["func"] = lambda e: e.via_bot_id is None
