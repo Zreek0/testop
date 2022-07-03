@@ -488,7 +488,7 @@ async def progress(current, total, event, start, type_of_ps, file_name=None):
 
 async def uploader(file, name, taime, event, msg):
     with open(file, "rb") as f:
-        result = await uploadable(
+        result = await upload_file(
             client=event.client,
             file=f,
             filename=name,
@@ -503,9 +503,10 @@ async def uploader(file, name, taime, event, msg):
             ),
         )
     return result
+
 async def downloader(filename, file, event, taime, msg):
     with open(filename, "wb") as fk:
-        result = await downloadable(
+        result = await download_file(
             client=event.client,
             location=file,
             out=fk,
