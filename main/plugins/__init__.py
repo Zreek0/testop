@@ -2,7 +2,6 @@ from main import *
 
 import inspect
 from pathlib import Path
-from . import
 from telethon import events
 from asyncio import sleep
 
