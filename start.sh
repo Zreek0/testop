@@ -1,6 +1,1 @@
-cd /
-rm -rf testbot
-git clone -b main https://github.com/Zreek0/testop testbot
-cd testbot
-pip install --quiet -r requirements.txt
-python3 -m main
+git pull && python3 -m main 
