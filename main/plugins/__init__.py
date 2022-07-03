@@ -9,6 +9,10 @@ from telethon.errors import MessageDeleteForbiddenError, MessageNotModifiedError
 from telethon.tl.custom import Message
 from telethon.tl.types import MessageService
 
+def restart_bot():
+	os.system("git pull -f")
+	os.execl(sys.executable, "python3", "-m", "main")
+
 async def bash(cmd, run_code=0):
     """
     run any command in subprocess and get output or error."""
@@ -118,3 +122,4 @@ async def eor(event, text=None, **args):
 async def eod(event, text=None, **kwargs):
     kwargs["time"] = kwargs.get("time", 8)
     return await eor(event, text, **kwargs)
+bot.restart = restart_bot
