@@ -5,6 +5,20 @@ import asyncio
 import sys
 import io
 from . import *
+def _parse_eval(value=None):
+    if not value:
+        return value
+    if hasattr(value, "stringify"):
+        try:
+            return value.stringify()
+        except TypeError:
+            pass
+    elif isinstance(value, dict):
+        try:
+            return json_parser(value, indent=1)
+        except BaseException:
+            pass
+    return str(value)
 
 def _stringify(text=None, *args, **kwargs):
     if text:
