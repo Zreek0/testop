@@ -8,8 +8,10 @@ import shutil
 import requests
 import cloudscraper
 import img2pdf
+import logging
 request = requests.Session()
 
+logger = logging.getLogger(__name__)
 def get_ids():
 	ids = list()
 	for i in range(2, int(gvarstatus("MID"))):
@@ -51,8 +53,9 @@ async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src")
 	with open(pdfname, "wb") as f:
 		try:
 			f.write(img2pdf.convert(images))
-		except Exception:
+		except Exception as err:
 			os.remove(pdfname)
+                        logger.exception(err)
 			cmd = await bash(f"convert `ls -tr {upr}/*` mydoc.pdf")
 			os.rename("mydoc.pdf", pdfname)
 		except:
