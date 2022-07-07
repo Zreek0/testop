@@ -10,7 +10,7 @@ import cloudscraper
 import img2pdf
 import logging
 request = requests.Session()
-import undetected_chromedriver 
+import undetected_chromedriver as uc
 from undetected_chromedriver import ChromeOptions
 
 def get_page_source(url):
