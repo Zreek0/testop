@@ -1,6 +1,6 @@
 from ..sql.globals import gvarstatus, addgvar, delgvar
 from . import *
-from .uws import get_names
+from .auws import get_names
 from telethon import events
 
 @bot.on(events.NewMessage(chats="adult_mangas"))
