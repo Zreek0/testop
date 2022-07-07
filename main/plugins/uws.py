@@ -10,6 +10,22 @@ import cloudscraper
 import img2pdf
 import logging
 request = requests.Session()
+import undetected_chromedriver 
+from undetected_chromedriver import ChromeOptions
+
+def get_page_source(url):
+	options = ChromeOptions()
+	options.add_argument("--no-sandbox")
+	options.add_argument("--start-maximized")
+	options.binary_location = "/app/.apt/usr/bin/google-chrome"
+	try:
+		browser=uc.Chrome(options=options, driver_executable_path="/app/.chromedriver/bin/chromedriver")
+		browser.get(url)
+		content = browser.page_source
+	except Exception as e:
+		raise e
+                browser.quit()
+	return content
 
 logger = logging.getLogger(__name__)
 def get_ids():
