@@ -32,7 +32,7 @@ async def _uws(event):
 		return await eod(mess, "`Sorry, invalid syntax`")
 	if input_str.strip().startswith("-"):
 		name = pnames()[int(splited[1])]
-		qname = name.lower().replace(" ", "-").replace("'", "").replace(",", "").replace("’", "").replace("?", "").replace("!", "")
+		wname = name.lower().replace(" ", "-").replace("'", "").replace(",", "").replace("’", "").replace("?", "").replace("!", "")
 		class_ = "wp-manga-chapter-img"
 		src = "src"
 		site = splited[0]
@@ -68,11 +68,11 @@ async def _uws(event):
 			await eod(mess, f"**Error :** {str(e)}")
 	else:
 		name = pnames()[int(splited[0])]
-		qname = name.lower().replace(" ", "-").replace("'", "").replace(",", "").replace("’", "").replace("?", "").replace("!", "")
+		wname = name.lower().replace(" ", "-").replace("'", "").replace(",", "").replace("’", "").replace("?", "").replace("!", "")
 		class_ = re.compile("p*")
 		src = "src"
 		ch = splited[1]
-		link = "https://manhwa18.cc/webtoon/" + qname + "/chapter-" + ch
+		link = "https://manhwa18.cc/webtoon/" + wname + "/chapter-" + ch
 		try:
 			pdfname = await post_ws(link, name.title(), ch, class_=class_, src=src)
 			xx = await uploader(pdfname, pdfname, time.time(), event, "")
