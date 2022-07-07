@@ -2,7 +2,7 @@ import time
 import requests
 import cloudscraper
 
-from .uws import gvarstatus
+from .uws import *
 from . import *
 
 def pnames():
