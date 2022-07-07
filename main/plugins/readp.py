@@ -17,12 +17,14 @@ def get_link(link, cloud=None):
 		r.raise_for_status()
 	return r.url
 
-@bot.on(events.NewMessage(pattern="/read (-h|-mc|-mh|-ws|-m|-18|-t|-20) ?(.*)", from_users=SUDOS))
+@bot.on(admin_cmd(pattern="read (-h|-mc|-mh|-ws|-m|-18|-t|-20) ?(.*)", allow_sudo=True))
 async def readpornhwa(event):
-	site = event.pattern_match.group(1).strip()
+	site = event.pattern_match.group(1)
 	input_str = event.pattern_match.group(2)
 	splited = input_str.split(" | ")
 	mess = await eor(event, "`Processing...`")
+	if not site:
+		return await eod(event, '`Sorry, invalid syntax.`')
 	if input_str and len(splited) == 2:
 		name = splited[0]
 		ch = splited[1]
@@ -58,11 +60,3 @@ async def readpornhwa(event):
 			await eod(mess, f"Sucessfully uploaded `{name.title()} - Chapter {ch}` from [here]({link})")
 		except Exception as e:
 			await eod(mess, f"**Error :** `{e}`")
-			pass
-	elif not input_str or len(splited) < 2:
-		await eod(mess, "`Sorry, invalid syntax.`")
-		
-		
-			
-			
-			
