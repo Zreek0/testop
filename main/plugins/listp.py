@@ -1,7 +1,7 @@
 import re
 from . import *
 from telethon import events
-from .uws import get_ids
+from .auws import get_ids
 
 ids = get_ids()
 @bot.on(events.NewMessage(pattern="/listp ?(.*)", from_users=SUDOS))
