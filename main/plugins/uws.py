@@ -24,7 +24,7 @@ def get_page_source(url):
 		content = browser.page_source
 	except Exception as e:
 		raise e
-        browser.quit()
+    browser.quit()
 	return content
 
 logger = logging.getLogger(__name__)
