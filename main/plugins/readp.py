@@ -1,7 +1,7 @@
 import os
 import time
 import requests
-from .uws import *
+from .auws import *
 from telethon.sync import events
 from . import *
 import cloudscraper
