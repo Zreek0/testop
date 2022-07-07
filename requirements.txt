@@ -11,3 +11,4 @@ cloudscraper
 img2pdf
 pillow
 AnilistPython
+undetected-chromedriver 
