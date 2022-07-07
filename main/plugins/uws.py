@@ -42,8 +42,9 @@ async def get_names():
 		if m and m.photo and m.text and "releasing" in m.message.lower():
 			name = m.message.split("\n")[0].split(" | ")[0]
 			names.append(name)
+	names = tuple(names)
 	return names
-
+	
 async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src"):
 	chno = str(chapter)
 	chno = chno.replace("-", ".")
