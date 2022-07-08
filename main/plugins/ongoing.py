@@ -28,7 +28,7 @@ async def _uws(event):
 	if not input_str or not len(splited) >=2:
 		return await eod(mess, "`Sorry, invalid syntax`")
 	if input_str.strip().startswith("-"):
-		name = pnames()[int(splited[1])]
+		name = pnames[int(splited[1])]
 		wname = name.lower().replace(" ", "-").replace("'", "").replace(",", "").replace("’", "").replace("?", "").replace("!", "")
 		class_ = "wp-manga-chapter-img"
 		src = "src"
@@ -64,7 +64,7 @@ async def _uws(event):
 		except Exception as e:
 			await eod(mess, f"**Error :** {str(e)}")
 	else:
-		name = pnames()[int(splited[0])]
+		name = pnames[int(splited[0])]
 		wname = name.lower().replace(" ", "-").replace("'", "").replace(",", "").replace("’", "").replace("?", "").replace("!", "")
 		class_ = re.compile("p*")
 		src = "src"
