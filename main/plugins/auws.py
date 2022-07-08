@@ -42,7 +42,7 @@ async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src")
 	if "hentaidexy" in link or "manhwahub" in link:
 		r = scraper.get(link)
 		r.raise_for_status()
-		content = r.contenta
+		content = r.content
 	elif "toonily" in link:
 		content = scraper.get(link).content
 	else:
