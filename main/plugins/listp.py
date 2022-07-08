@@ -10,7 +10,7 @@ async def getplist(event):
 	input_str = event.pattern_match.group(1)
 	post = str()
 	n = 0
-	for i in range(2, ids):
+	for i in range(2, len(ids)):
 		m = await app.get_messages("adult_mangas", message_ids=i)
 		if m.caption and "releasing" in m.caption.lower():
 			name = m.caption.split("\n")[0].split(" | ")[0]
