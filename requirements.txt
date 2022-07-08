@@ -2,6 +2,8 @@ sqlalchemy
 psycopg2-binary
 telethon
 mautrix
+pyrogram
+tgcrypto
 cryptg
 selenium
 python-dotenv
