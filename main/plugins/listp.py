@@ -19,6 +19,6 @@ async def getplist(event):
 				post += f"➤ [{name}]({url})\n"
 			else:
 				n += 1
-				post += f"{n-1}.] [{name}]({url})"
+				post += f"{n-1}.] [{name}]({url})\n"
 	await eor(e, post)
 	
