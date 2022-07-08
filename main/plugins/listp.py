@@ -8,10 +8,10 @@ ids = get_ids()
 async def getplist(event):
 	e = await eor(event, "`Processing...`")
 	input_str = event.pattern_match.group(1)
-	mess = await app.get_messages("adult_mangas", message_ids=ids)
 	post = str()
 	n = 0
-	for m in mess:
+	for i in range(ids):
+		m = await app.get_messages("adult_mangas", message_ids=i)
 		if m.caption and "releasing" in m.caption.lower():
 			name = m.caption.split("\n")[0].split(" | ")[0]
 			url = m.caption_entities[-1].url
