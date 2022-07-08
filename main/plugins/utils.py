@@ -130,7 +130,7 @@ async def listdirectory(client, event):
         ttol = "0 B"
     text += f"\n\n`Folders` :  `{foc}` :   `{tfos}`\n`Files` :       `{flc}` :   `{tfls}`\n`Total` :       `{flc+foc}` :   `{ttol}`"
     try:
-        await bot.send_message(event.chat_id, text, reply_to=event.id)
+        await bot.send_message(event.chat.id, text, reply_to=event.id)
     except MessageTooLongError:
         with io.BytesIO(str.encode(text)) as out_file:
             out_file.name = "output.txt"
