@@ -54,8 +54,7 @@ async def readpornhwa(event):
 			src = "data-src"
 		try:
 			pdfname = await post_ws(link, name.title(), ch, class_=class_, src=src)
-			xx = await uploader(pdfname, pdfname, time.time(), event, "")
-			await event.client.send_file(event.chat_id, xx)
+			await app.send_document(event.chat_id, pdfname)
 			os.remove(pdfname)
 			await eod(mess, f"Sucessfully uploaded `{name.title()} - Chapter {ch}` from [here]({link})")
 		except Exception as e:
