@@ -33,18 +33,15 @@ def get_ids():
 	for i in range(2, int(gvarstatus("MID"))):
 		ids.append(i)
 	return ids
-
-async def get_names():
+def get_names():
 	ids = get_ids()
-	mess = await bot.get_messages("adult_mangas", ids=ids)
+	mess = app.get_messages("adult_mangas", message_ids=ids)
 	names = []
 	for m in mess:
-		if m and m.photo and m.text and "releasing" in m.message.lower():
-			name = m.message.split("\n")[0].split(" | ")[0]
-			names.append(name)
-	names = tuple(names)
+		if m.caption and "releasing" in m.caption.lower():
+			names.append(m.caption.split("\n")[0].split(" | ")[0])
 	return names
-	
+
 async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src"):
 	chno = str(chapter)
 	chno = chno.replace("-", ".")
