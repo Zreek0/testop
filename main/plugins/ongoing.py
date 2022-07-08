@@ -21,7 +21,7 @@ def get_link(link, cloud=None):
 
 @bot.on(admin_cmd("uws ?(.*)", allow_sudo=True))
 async def _uws(event):
-        pnames = await get_names()
+	pnames = await get_names()
 	input_str = event.pattern_match.group(1)
 	splited = str(input_str).split(" ")
 	mess = await eor(event, "`Processing...`")
