@@ -7,6 +7,3 @@ from telethon import events
 async def _mid(event):
 	if event.text and "releasing" in event.message.lower():
 		addgvar("MID", event.id)
-		names = await get_names()
-		addgvar("GET_NAMES", names)
-	
