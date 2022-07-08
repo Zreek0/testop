@@ -19,7 +19,7 @@ def hb(size):
         size = f"{size:.2f}{unit}B"
     return size
 
-@app.on_message(filters.user(list(SUDOS)) & filter.regex("^/ls ?(.*)"))
+@app.on_message(filters.user(list(SUDOS)) & filters.regex("^/ls ?(.*)"))
 async def listdirectory(bot, event):
     files = event.matches[0].group(1)
     if not files:
