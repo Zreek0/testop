@@ -131,7 +131,7 @@ async def listdirectory(bot, event):
     text += f"\n\n`Folders` :  `{foc}` :   `{tfos}`\n`Files` :       `{flc}` :   `{tfls}`\n`Total` :       `{flc+foc}` :   `{ttol}`"
     try:
         await app.send_message(event.chat_id, text, reply_to_message_id=event.id)
-    except erros.BadRequest:
+    except errors.BadRequest:
         with io.BytesIO(str.encode(text)) as out_file:
             out_file.name = "output.txt"
             await app.send_document(event.chat.id, out_file, reply_to_message_id=event.id)
