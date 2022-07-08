@@ -35,9 +35,9 @@ def get_ids():
 	return ids
 def get_names():
 	ids = get_ids()
-	mess = app.get_messages("adult_mangas", message_ids=ids)
-	names = []
-	for m in mess:
+	names = list()
+	for i in range(2, ids):
+		m = app.get_messages("adult_mangas", message_ids=i)
 		if m.caption and "releasing" in m.caption.lower():
 			names.append(m.caption.split("\n")[0].split(" | ")[0])
 	return names
