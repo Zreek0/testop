@@ -46,7 +46,7 @@ async def post_to_telegraph(page_title, html_format_content):
 async def nhentai_(event):
     if event.fwd_from:
         return
-    await eor(event, "`Searching for doujin...`")
+    e = await eor(event, "`Searching for doujin...`")
     input_str = event.pattern_match.group(1)
     code = input_str
     if "nhentai" in input_str:
@@ -60,9 +60,9 @@ async def nhentai_(event):
     except BaseException as n_e:
         if "404" in str(n_e):
             return await eod(
-                event, f"No doujin found for `{code}`. You shouldn't use nhentai :-("
+                e, f"No doujin found for `{code}`. You shouldn't use nhentai :-("
             )
-        return await eod(event, f"**ERROR :** `{n_e}`")
+        return await eod(e, f"**ERROR :** `{n_e}`")
     msg = ""
     imgs = "".join(f"<img src='{url}'/>" for url in doujin.image_urls)
     imgs = f"&#8205; {imgs}"
@@ -118,7 +118,7 @@ async def nhentai_(event):
 
         msg += "\n" + " ".join(natsorted(categories))
     msg += f"\n**Pages :**\n{doujin.num_pages}"
-    await eor(event, msg, link_preview=True)
+    await eor(e, msg, link_preview=True)
 
 @bot.on(admin_cmd(pattern="nh(?: |$)(.*)", allow_sudo=True))
 async def cult(event):
