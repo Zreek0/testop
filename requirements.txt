@@ -12,3 +12,7 @@ img2pdf
 pillow
 AnilistPython
 undetected-chromedriver 
+html-telegraph-poster
+nhentai
+hentai
+natsort 
