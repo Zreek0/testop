@@ -2,7 +2,7 @@ import os, io, glob
 
 from telethon.sync import events
 from telethon.errors.rpcerrorlist import MessageTooLongError
-from pyrogram import filterts, errors
+from pyrogram import filters, errors
 from . import *
 
 def hb(size):
