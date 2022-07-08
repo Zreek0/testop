@@ -29,7 +29,7 @@ async def listdirectory(client, event):
         files += "/*"
     files = glob.glob(files)
     if not files:
-        return await event.repy_text("`Directory Empty or Incorrect.`")
+        return await event.reply_text("`Directory Empty or Incorrect.`")
     pyfiles = []
     jsons = []
     vdos = []
