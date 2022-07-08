@@ -5,11 +5,6 @@ import cloudscraper
 from .auws import *
 from . import *
 
-def pnames():
-	names = gvarstatus("GET_NAMES").replace(")", "").replace("(", "").replace('"', '')
-	names = names.split(",")
-	return names
-
 def get_link(link, cloud=None):
 	if cloud:
 		try:
@@ -28,6 +23,7 @@ async def _uws(event):
 	input_str = event.pattern_match.group(1)
 	splited = str(input_str).split(" ")
 	mess = await eor(event, "`Processing...`")
+	pnames = await get_names()
 	if not input_str or not len(splited) >=2:
 		return await eod(mess, "`Sorry, invalid syntax`")
 	if input_str.strip().startswith("-"):
