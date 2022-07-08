@@ -33,11 +33,11 @@ def get_ids():
 	for i in range(2, int(gvarstatus("MID"))):
 		ids.append(i)
 	return ids
-def get_names():
+async def get_names():
 	ids = get_ids()
 	names = list()
 	for i in range(2, len(ids)):
-		m = app.get_messages("adult_mangas", message_ids=i)
+		m = await app.get_messages("adult_mangas", message_ids=i)
 		if m.caption and "releasing" in m.caption.lower():
 			names.append(m.caption.split("\n")[0].split(" | ")[0])
 	return names
