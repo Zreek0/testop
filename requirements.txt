@@ -1,5 +1,7 @@
 sqlalchemy
 psycopg2-binary
+pyrogram
+tgcrypto
 telethon
 mautrix
 cryptg
