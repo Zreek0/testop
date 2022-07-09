@@ -75,7 +75,7 @@ async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src")
 	for i in image_links:
 		i = i[src].split("\t")[-1]
 		n += 1
-		file = "{upr}/{n}.jpg"
+		file = f"{upr}/{n}.jpg"
 		threading.Thread(target=download, args=[i, file, dict(Referer=link)]).start()
 		images.append(file)
 	with open(pdfname, "wb") as f:
