@@ -1,9 +1,9 @@
 from ..sql.globals import gvarstatus, addgvar, delgvar
 from . import *
 from .auws import *
-from telethon import events
+from pyrogram import filters
 
-@bot.on(events.NewMessage(chats="adult_mangas"))
-async def _mid(event):
-	if event.text and "releasing" in event.message.lower():
+@app.on_message(filters.chat("adult_mangas"))
+async def _mid(client, event):
+	if event.caption and "RELEASING" in event.caption:
 		addgvar("MID", event.id)
