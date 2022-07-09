@@ -83,7 +83,7 @@ async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src")
 			images = sorted(images)
 			f.write(img2pdf.convert(images))
 		except Exception as err:
-			cmd = os.system(f"convert `ls -tr ./{upr}/*jpg` mydoc.pdf")
+			cmd = os.system(f"convert -density 300 PointOnLine.pdf -quality 90 -colorspace RGB `ls -tr ./{upr}/*`")
 			os.rename("mydoc.pdf", pdfname)
 			logging.info(err)
 		except:
