@@ -33,7 +33,7 @@ def get_names_1():
 	return names
 def get_names_2():
 	ids = list()
-	for i in range(200, int(gvarstatus("MID"))):
+	for i in range(205, int(gvarstatus("MID"))):
 		ids.append(i)
 	mess = app.get_messages("adult_mangas", message_ids=ids)
 	names = list()
