@@ -22,7 +22,7 @@ async def getplist(event):
 	for m in mess:
 		if m.caption and m.caption_entities and "releasing" in mess.caption.lower():
 			name = m.caption.split("\n")[0].split(" | ")[0]
-			url = m.caption_entities[-1].url)
+			url = m.caption_entities[-1].url
 			if input_str.strip() in ["-c", "--channel"]:
 				post += f"➤ [{name}]({url})"
 			else:
