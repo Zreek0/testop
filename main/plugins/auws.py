@@ -53,7 +53,7 @@ def get_names():
 async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src"):
 	chno = str(chapter)
 	chno = chno.replace("-", ".")
-	pdfname = f"Chapter {chno} {name}" + " @Adult_Mangas.pdf"
+	pdfname = f"./Chapter {chno} {name}" + " @Adult_Mangas.pdf"
 	upr = f"manga_{chapter}"
 	if not os.path.exists(upr):
 		os.mkdir(upr)
@@ -72,18 +72,18 @@ async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src")
 	soup = BeautifulSoup(content, "html.parser")
 	image_links = soup.find_all("img", class_)
 	n = 0
+	images = []
 	for i in image_links:
 		i = i[src].split("\t")[-1]
 		n += 1
 		file = open(f"./{upr}/{n}.jpg", "wb")
-		threading.Thread(target=download, args=[i, file.name, dict(Referer=link)]).start()
+		file.write(requests.get(i, headers={"Referer": link).content)
+		images.append(file.name)
 	with open(pdfname, "wb") as f:
 		try:
-			images = glob.glob(f"./{upr}/*jpg")
-			images = sorted(images)
 			f.write(img2pdf.convert(images))
 		except Exception as err:
-			cmd = os.system(f"convert `ls -v ./{upr}/*` mydoc.pdf")
+			cmd = os.system(f"convert `ls -tr ./{upr}/*` mydoc.pdf")
 			os.rename("mydoc.pdf", pdfname)
 			logging.info(err)
 		except:
