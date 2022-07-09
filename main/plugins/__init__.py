@@ -125,8 +125,8 @@ async def eod(event, text=None, **kwargs):
     return await eor(event, text, **kwargs)
 bot.restart = restart_bot
 
-def download(url, filename):
-	r = requests.get(url, stream=True)
+def download(url, filename, headers=None):
+	r = requests.get(url, stream=True, hreaders=headers)
 	r.raise_for_status()
 	with open(filename, "wb") as file:
 		file.write(r.content)
