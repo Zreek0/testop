@@ -9,6 +9,7 @@ import requests
 import threading
 import cloudscraper
 import img2pdf
+import glob
 import logging
 request = requests.Session()
 import undetected_chromedriver as uc
@@ -71,15 +72,15 @@ async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src")
 	soup = BeautifulSoup(content, "html.parser")
 	image_links = soup.find_all("img", class_)
 	n = 0
-	images = []
 	for i in image_links:
 		i = i[src].split("\t")[-1]
 		n += 1
 		file = open(f"./{upr}/{n}.jpg", "wb")
 		threading.Thread(target=download, args=[i, file.name, dict(Referer=link)]).start()
-		images.append(file.name)
 	with open(pdfname, "wb") as f:
 		try:
+			images = glob.glob(f"./{upr}/*jpg")
+			images = sorted(images)
 			f.write(img2pdf.convert(images))
 		except Exception as err:
 			os.remove(pdfname)
