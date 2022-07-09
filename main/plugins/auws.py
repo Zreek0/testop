@@ -83,10 +83,9 @@ async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src")
 			images = sorted(images)
 			f.write(img2pdf.convert(images))
 		except Exception as err:
-			os.remove(pdfname)
-			logger.exception(err)
-			cmd = await bash(f"convert `ls -tr {upr}/*` mydoc.pdf")
+			cmd = os.system(f"convert `ls -tr ./{upr}/*jpg` mydoc.pdf")
 			os.rename("mydoc.pdf", pdfname)
+			logging.info(err)
 		except:
 			raise 
 	shutil.rmtree(upr)
