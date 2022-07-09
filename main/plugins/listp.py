@@ -24,8 +24,8 @@ async def getplist(event):
 			name = m.caption.split("\n")[0].split(" | ")[0]
 			url = m.caption_entities[-1].url
 			if input_str.strip() in ["-c", "--channel"]:
-				post += f"➤ [{name}]({url})"
+				post += f"➤ [{name}]({url})\n"
 			else:
 				n += 1
-				post+= f"{n-1}.] [{name}]({url})"
+				post+= f"{n-1}.] [{name}]({url})\n"
 	await eor(e, post)
