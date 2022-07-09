@@ -77,7 +77,7 @@ async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src")
 		i = i[src].split("\t")[-1]
 		n += 1
 		file = open(f"./{upr}/{n}.jpg", "wb")
-		file.write(requests.get(i, headers={"Referer": link).content)
+		file.write(requests.get(i, headers={"Referer": link}).content))
 		images.append(file.name)
 	with open(pdfname, "wb") as f:
 		try:
