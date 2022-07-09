@@ -6,9 +6,9 @@ from ..sql.globals import gvarstatus
 
 ids1 = list()
 ids2 = list()
-for i in range(2, 200):
+for i in range(2, 201):
 	ids1.append(i)
-for i in range(205, int(gvarstatus("MID"))):
+for i in range(201, int(gvarstatus("MID"))):
 	ids2.append(i)
 @bot.on(events.NewMessage(pattern="/listp ?(.*)", from_users=SUDOS))
 async def getplist(event):
