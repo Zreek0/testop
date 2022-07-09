@@ -126,8 +126,8 @@ async def eod(event, text=None, **kwargs):
 bot.restart = restart_bot
 
 def download(url, filename, headers=None):
-	r = requests.get(url, headers=headers)
+	r = requests.get(url, headers=headers, stream=True)
 	r.raise_for_status()
 	with open(filename, "wb") as file:
-		file.write(r.content)
+		shutil.copyfileobj(r.raw, file)
 	return file.name
