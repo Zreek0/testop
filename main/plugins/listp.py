@@ -20,7 +20,7 @@ async def getplist(event):
 	mess2 = await app.get_messages("adult_mangas", message_ids=ids2)
 	mess = mess1 + mess2
 	for m in mess:
-		if m.caption and m.caption_entities and "releasing" in mess.caption.lower():
+		if m.caption and m.caption_entities and "releasing" in m.caption.lower():
 			name = m.caption.split("\n")[0].split(" | ")[0]
 			url = m.caption_entities[-1].url
 			if input_str.strip() in ["-c", "--channel"]:
