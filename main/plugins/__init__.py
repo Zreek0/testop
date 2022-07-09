@@ -130,4 +130,5 @@ def download(url, filename, headers=None):
 	r.raise_for_status()
 	with open(filename, "wb") as file:
 		shutil.copyfileobj(r.raw, file)
+		file.close()
 	return file.name
