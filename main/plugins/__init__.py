@@ -1,6 +1,6 @@
 from main import *
 
-import inspect, re, asyncio, time, sys, os
+import inspect, re, asyncio, time, sys, os, requests, shutil
 from pathlib import Path
 from telethon import events
 from asyncio import sleep
@@ -124,3 +124,10 @@ async def eod(event, text=None, **kwargs):
     kwargs["time"] = kwargs.get("time", 8)
     return await eor(event, text, **kwargs)
 bot.restart = restart_bot
+
+def download(url, filename):
+	r = requests.get(url, stream=True)
+	r.raise_for_status()
+	with open(filename, "wb") as file:
+		file.write(r.content)
+	return file.name
