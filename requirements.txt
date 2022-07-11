@@ -19,3 +19,4 @@ nhentai
 hentai
 natsort 
 reportlab
+pdfkit
