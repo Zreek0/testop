@@ -15,7 +15,7 @@ request = requests.Session()
 import undetected_chromedriver as uc
 from undetected_chromedriver import ChromeOptions
 from reportlab.pdfgen import canvas
-
+from PIL import Image
 
 logger = logging.getLogger(__name__)
 def get_ids():
