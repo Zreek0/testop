@@ -1,2 +1,4 @@
 tree
-p7zip-full
+wkhtmltopdf
+libfontconfig
+xvfb
