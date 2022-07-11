@@ -50,7 +50,7 @@ def get_names():
 	names = x + x1
 	return names
 
-def _create_pdf(path, images: list):
+def create_pdf(path, images: list):
 	pdf = canvas.Canvas(path)
 
 	for image in images:
