@@ -14,7 +14,7 @@ import logging
 request = requests.Session()
 import undetected_chromedriver as uc
 from undetected_chromedriver import ChromeOptions
-
+from reportlab.pdfgen import canvas
 
 
 logger = logging.getLogger(__name__)
@@ -49,6 +49,27 @@ def get_names():
 	x1 = get_names_2()
 	names = x + x1
 	return names
+
+def _create_pdf(path, images: list):
+	pdf = canvas.Canvas(path)
+
+	for image in images:
+
+		# noinspection PyBroadException
+		try:
+			with Image.open(image) as img:
+				w, h = img.size
+
+		except BaseException:
+			continue
+
+		pdf.setPageSize((w, h))  # Set the page dimensions to the image dimensions
+
+		pdf.drawImage(image, x=0, y=0)  # Insert the image onto the current page
+
+		pdf.showPage()  # Create a new page ready for the next image
+
+	pdf.save()
 
 async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src"):
 	chno = str(chapter)
