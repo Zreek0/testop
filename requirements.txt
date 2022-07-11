@@ -18,3 +18,4 @@ html-telegraph-poster
 nhentai
 hentai
 natsort 
+reportlab
