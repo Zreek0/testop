@@ -47,8 +47,15 @@ async def _exec(event):
 		ultd = err + out
 		with BytesIO(str.encode(ultd)) as out_file:
 			out_file.name = "bash.txt"
-            await event.client.send_file(event.chat_id, out_file, force_document=True, allow_cache=False, caption=f"`{cmd}`" if len(cmd) < 998 else None, reply_to=reply_id)
-        await xx.delete()
+            await bot.send_file(
+                event.chat_id,
+                out_file,
+                force_document=True,
+                allow_cache=False,
+                caption=f"```{cmd}```" if len(cmd) < 998 else None,
+                reply_to=reply_to_id,
+            )
+            await xx.delete()
     else:
     	await eor(xx, OUT, link_preview=True)
    
