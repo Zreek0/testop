@@ -25,6 +25,41 @@ def _stringify(text=None, *args, **kwargs):
         text = _parse_eval(text)
     return print(text, *args, **kwargs)
 
+@bot.on(admin_cmd("exec ?(.*)", allow_sudo=True))
+async def _exec(event):
+	e = await eor(event, "`Processing ...`")
+	cmd = event.pattern_match.group(1)
+	if not cmd:
+		return await eod(e, "`Give something to execute...`")
+	reply_id = event.reply_to_msg_id or event.id
+	stdout, stderr = await bash(cmd, run_code=1)
+    OUT = f"**✦ COMMAND:**\n`{cmd}` \n\n"
+    err, out = "", ""
+    if stderr:
+        err = f"**✦ STDERR:** \n`{stderr}`\n\n"
+    if stdout:
+    	stdout = f"`{stdout}`"
+    	out = f"**✦ STDOUT:**\n{stdout}"
+    if not stderr and not stdout:
+        out = "**✦ STDOUT:**\n`Success`"
+    OUT += err + out
+    if len(OUT) > 4096:
+    	ultd = err + out
+        with BytesIO(str.encode(ultd)) as out_file:
+            out_file.name = "bash.txt"
+            await event.client.send_file(
+                event.chat_id,
+                out_file,
+                force_document=True,
+                allow_cache=False,
+                caption=f"`{cmd}`" if len(cmd) < 998 else None,
+                reply_to=reply_id,
+            )
+            await xx.delete()
+    else:
+    	await eor(xx, OUT, link_preview=False)
+   
+    
 @bot.on(admin_cmd("eval ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
