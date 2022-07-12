@@ -45,7 +45,7 @@ async def _(event):
     OUT += err + out
     if len(OUT) > 4096:
         ultd = err + out
-        with BytesIO(str.encode(ultd)) as out_file:
+        with io.BytesIO(str.encode(ultd)) as out_file:
             out_file.name = "bash.txt"
             await event.client.send_file(
                 event.chat_id,
