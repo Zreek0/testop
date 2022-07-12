@@ -99,17 +99,16 @@ async def _(event):
         evaluation = "Success"
 
     final_output = "**✦ Code :**\n`{}` \n\n **✦ Result :** \n`{}` \n".format(cmd, evaluation)
-
     if len(final_output) > 4096:
         with io.BytesIO(str.encode(final_output)) as out_file:
             out_file.name = "eval.text"
-            await bot.send_file(
+            await event.client.send_file(
                 event.chat_id,
                 out_file,
                 force_document=True,
                 allow_cache=False,
                 caption=f"```{cmd}```" if len(cmd) < 998 else None,
-                reply_to=reply_to_id,
+                reply_to=reply_to_id
             )
             await e.delete()
     else:
