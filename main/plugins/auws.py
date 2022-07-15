@@ -18,36 +18,16 @@ from reportlab.pdfgen import canvas
 from PIL import Image
 
 logger = logging.getLogger(__name__)
-def get_ids():
-	ids = list()
-	for i in range(2, int(gvarstatus("MID"))):
-		ids.append(i)
-	return ids
-def get_names_1():
-	ids = list()
-	for i in range(2, 201):
-		ids.append(i)
-	mess = app.get_messages("adult_mangas", message_ids=ids)
-	names = list()
-	for m in mess:
-		if m.caption and "releasing" in m.caption.lower():
-			names.append(m.caption.split("\n")[0].split("|")[0].strip())
-	return names
-def get_names_2():
-	ids = list()
-	for i in range(205, int(gvarstatus("MID"))):
-		ids.append(i)
-	mess = app.get_messages("adult_mangas", message_ids=ids)
-	names = list()
-	for m in mess:
-		if m.caption and "releasing" in m.caption.lower():
-			names.append(m.caption.split("\n")[0].split("|")[0].strip())
-	return names
-
 def get_names():
-	x = get_names_1()
-	x1 = get_names_2()
-	names = x + x1
+	names = []
+	ids1 = list(range(2, 201))
+	ids2 = list(range(2, int(gvarstatus("MID"))))
+	mess1 = app.get_messages("adult_mangas", message_ids=ids1)
+	mess2 = app.get_messages("adult_mangas", message_ids=ids2)
+	mess = mess1 + mess2
+	for m in mess:
+		it m.photo and m.caption and "releasing" in m.caption.lower():
+			names.append(m.caption.split("\n")[0].split(" | ")[0])
 	return names
 
 def create_pdf(path, images: list):
