@@ -1,7 +1,6 @@
 import re
 from . import *
 from telethon import events
-from .auws import get_ids
 from ..sql.globals import gvarstatus
 
 @bot.on(events.NewMessage(pattern="/listp ?(.*)", from_users=SUDOS))
