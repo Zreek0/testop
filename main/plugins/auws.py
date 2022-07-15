@@ -63,14 +63,12 @@ async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src")
 	if "hentaidexy" in link or "manhwahub" in link:
 		r = scraper.get(link)
 		r.raise_for_status()
-		content = r.content
 	elif "toonily" in link:
-		content = scraper.get(link).content
+		r = scraper.get(link)
 	else:
 		r = requests.get(link)
 		r.raise_for_status()
-		content = r.content
-	soup = BeautifulSoup(content, "html.parser")
+	soup = BeautifulSoup(r.text, "html.parser")
 	image_links = soup.find_all("img", class_)
 	n = 0
 	images = []
@@ -78,13 +76,13 @@ async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src")
 		i = i[src].split("\t")[-1]
 		n += 1
 		file = open(f"./{upr}/{n}.jpg", "wb")
-		download(i, file.name, dict(Referer=link))
+		download(i, file.name, dict(Referer=r.url))
 		images.append(file.name)
 	with open(pdfname, "wb") as f:
 		try:
 			f.write(img2pdf.convert(images))
 		except Exception as err:
-			cmd = os.system(f"convert `ls -tr {upr}` mydoc.pdf")
+			cmd = os.system(f"convert `ls -tr {upr}/` mydoc.pdf")
 			os.rename("mydoc.pdf", pdfname)
 			logging.info(err)
 		except:
