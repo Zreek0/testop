@@ -55,7 +55,7 @@ async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src")
 	chno = str(chapter)
 	chno = chno.replace("-", ".")
 	pdfname = f"./Chapter {chno} {name}" + " @Adult_Mangas.pdf"
-	upr = f"manga_{chapter}"
+	upr = f"manga{chapter}"
 	if not os.path.exists(upr):
 		os.mkdir(upr)
 	scraper = cloudscraper.create_scraper()
@@ -84,7 +84,7 @@ async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src")
 		try:
 			f.write(img2pdf.convert(images))
 		except Exception as err:
-			cmd = os.system(f"convert `ls -tr {upr}/*` mydoc.pdf")
+			cmd = os.system(f"convert `ls -tr {upr}` mydoc.pdf")
 			os.rename("mydoc.pdf", pdfname)
 			logging.info(err)
 		except:
