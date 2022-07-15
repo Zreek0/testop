@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 def get_names():
 	names = []
 	ids1 = list(range(2, 201))
-	ids2 = list(range(2, int(gvarstatus("MID"))))
+	ids2 = list(range(201, int(gvarstatus("MID"))))
 	mess1 = app.get_messages("adult_mangas", message_ids=ids1)
 	mess2 = app.get_messages("adult_mangas", message_ids=ids2)
 	mess = mess1 + mess2
