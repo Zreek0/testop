@@ -4,18 +4,14 @@ from telethon import events
 from .auws import get_ids
 from ..sql.globals import gvarstatus
 
-ids1 = list()
-ids2 = list()
-for i in range(2, 201):
-	ids1.append(i)
-for i in range(201, int(gvarstatus("MID"))):
-	ids2.append(i)
 @bot.on(events.NewMessage(pattern="/listp ?(.*)", from_users=SUDOS))
 async def getplist(event):
 	e = await eor(event, "`Processing...`")
 	input_str = event.pattern_match.group(1)
 	post = str()
 	n = 0
+	ids1 = list(range(2, 201))
+	ids2 = list(range(2, int(gvarstatus("MID"))))
 	mess1 = await app.get_messages("adult_mangas", message_ids=ids1)
 	mess2 = await app.get_messages("adult_mangas", message_ids=ids2)
 	mess = mess1 + mess2
