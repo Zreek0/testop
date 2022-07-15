@@ -26,7 +26,7 @@ def get_names():
 	mess2 = app.get_messages("adult_mangas", message_ids=ids2)
 	mess = mess1 + mess2
 	for m in mess:
-		it m.photo and m.caption and "releasing" in m.caption.lower():
+		if m.photo and m.caption and "releasing" in m.caption.lower():
 			names.append(m.caption.split("\n")[0].split(" | ")[0])
 	return names
 
