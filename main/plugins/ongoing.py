@@ -72,8 +72,7 @@ async def _uws(event):
 		link = "https://manhwa18.cc/webtoon/" + wname + "/chapter-" + ch
 		try:
 			pdfname = await post_ws(link, name.title(), ch, class_=class_, src=src)
-			xx = await uploader(pdfname, pdfname, time.time(), event, "")
-			await event.client.send_file(-1001783376856, xx)
+			await app.send_document(-1001783376856, pdfname)
 			os.remove(pdfname)
 			await eod(mess, f"**Successfully uploaded** [{name.title()} - Chapter {ch}]({link})")
 		except Exception as e:
