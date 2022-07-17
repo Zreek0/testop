@@ -13,6 +13,7 @@ import glob
 import logging
 request = requests.Session()
 import undetected_chromedriver as uc
+from concurrent.futures import ThreadPoolExecutor
 from undetected_chromedriver import ChromeOptions
 from reportlab.pdfgen import canvas
 from PIL import Image
@@ -76,7 +77,8 @@ async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src")
 		i = i[src].split("\t")[-1]
 		n += 1
 		file = open(f"./{upr}/{n}.jpg", "wb")
-		download(i, file.name, dict(Referer=r.url))
+		with ThreadPoolExecutor(max_workers=12) as executor:
+			executor.submit(download, i, file.name, dict(Referer=r.url))
 		images.append(file.name)
 	with open(pdfname, "wb") as f:
 		try:
