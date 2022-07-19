@@ -20,6 +20,16 @@ def get_link(link, cloud=None):
 		r.raise_for_status()
 	return r.url
 
+def h20_search(name):
+	scraper = cloudscraper.create_scraper()
+	r = requests.get(f"https://hentai20.com/?s={name}&post_type=wp-manga")
+	soup = BeautifulSoup(r.text, "html.parser")
+	data = soup.find("h3", "h4")
+	if not "wp-manga" in r.url:
+		return r.url
+	link = data.a["href"]
+	return link
+
 @bot.on(admin_cmd("uws ?(.*)", allow_sudo=True))
 async def _uws(event):
 	input_str = event.pattern_match.group(1)
@@ -55,6 +65,11 @@ async def _uws(event):
 			link = "https://toonily.com/webtoon/" + wname + "/chapter-" + ch
 			class_ = "wp-manga-chapter-img img-responsive lazyload effect-fade"
 			src = "data-src"
+		elif site == "-20":
+			try:
+				link = h20_search(wname.replace("-", "+"))
+			except Exception as e:
+				return await eod(mess, f"**Error :** `{e}`")
 		try:
 			pdfname = await post_ws(link, name.title(), ch, class_=class_, src=src)
 			xx = await uploader(pdfname, pdfname, time.time(), event, "")
