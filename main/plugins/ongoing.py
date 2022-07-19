@@ -68,6 +68,7 @@ async def _uws(event):
 		elif site == "-20":
 			try:
 				link = h20_search(wname.replace("-", "+"))
+				link = link + "chapter-" + ch
 			except Exception as e:
 				return await eod(mess, f"**Error :** `{e}`")
 		try:
