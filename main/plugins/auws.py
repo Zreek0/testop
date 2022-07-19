@@ -77,8 +77,7 @@ async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src")
 		i = i[src].split("\t")[-1]
 		n += 1
 		file = open(f"./{upr}/{n}.jpg", "wb")
-		with ThreadPoolExecutor(max_workers=40) as executor:
-			executor.submit(download, i, file.name, dict(Referer=r.url))
+		await fast_download(i, filename=file.name, headers=dict(Referer=r.url))
 		images.append(file.name)
 	with open(pdfname, "wb") as f:
 		try:
