@@ -20,3 +20,4 @@ hentai
 natsort 
 reportlab
 pdfkit
+aiofiles
