@@ -6,6 +6,7 @@ from telethon.sync import events
 from . import *
 import cloudscraper
 import asyncio
+from .ongoing import h20_search
 
 def get_link(link, cloud=None):
 	if cloud:
@@ -52,6 +53,12 @@ async def readpornhwa(event):
 			link = "https://toonily.com/webtoon/" + wname + "/chapter-" + ch
 			class_ = "wp-manga-chapter-img img-responsive lazyload effect-fade"
 			src = "data-src"
+		elif site == "-20":
+			try:
+				link = h20_search(wname.replace("-", "+"))
+				link = link + "chapter-" + ch
+			except Exception as e:
+				return await eod(mess, f"**Error :** `{e}`")
 		try:
 			pdfname = await post_ws(link, name.title(), ch, class_=class_, src=src)
 			await app.send_document(event.chat_id, pdfname)
