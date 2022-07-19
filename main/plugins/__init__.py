@@ -1,6 +1,7 @@
 from main import *
 
-import inspect, re, asyncio, time, sys, os, requests, shutil
+import inspect, re, asyncio, time, sys, os, requests, shutil, aiohttp, aiofiles
+from urllib.parse import unquote
 from pathlib import Path
 from telethon import events
 from asyncio import sleep
@@ -132,3 +133,22 @@ def download(url, filename, headers=None):
 		shutil.copyfileobj(r.raw, file)
 		file.close()
 	return file.name
+
+async def fast_download(download_url, filename=None, progress_callback=None, headers=None):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(download_url, headers=headers, timeout=None) as response:
+            if not filename:
+                filename = unquote(download_url.rpartition("/")[-1])
+            total_size = int(response.headers.get("content-length", 0)) or None
+            downloaded_size = 0
+            start_time = time.time()
+            with open(filename, "wb") as f:
+                async for chunk in response.content.iter_chunked(1024):
+                    if chunk:
+                        f.write(chunk)
+                        downloaded_size += len(chunk)
+                    if progress_callback and total_size:
+                        await _maybe_await(
+                            progress_callback(downloaded_size, total_size)
+                        )
+            return filename, time.time() - start_time
