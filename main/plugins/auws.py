@@ -110,7 +110,7 @@ def h20():
  return args
 class nhentai:
 	def __init__(self, link):
-		if "nhentai" in link:
+		if "hentai" in link:
 			link = link
 			code_regex = r"(?:https?://)?(?:www\.)?nhentai\.to/g/(\d+)"
 			self.code = re.match(code_regex, link).group(1)
