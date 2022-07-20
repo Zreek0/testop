@@ -127,6 +127,7 @@ class nhentai:
 		self.categories = []
 		self.languages = []
 		self.images = []
+		self.url = response.url
 		tdata = soup.find_all("a", "tag")
 		for t in tdata:
 			if "tag" in t["href"]:
