@@ -74,30 +74,30 @@ async def _(event):
 	title = doujin.title
 	nn = title.split("|")
 	pdfname = nn[0].strip() + " @Adult_Mangas.pdf" if len(nn) > 1 else nn[0] + ".pdf"
-    graph_link = await post_to_telegraph(title, imgs)
-    msg += f"[{title}]({graph_link})\n"
-    msg += f"\n➤ **Code :** {doujin.code}"
-    if doujin.categories:
-    	msg += "\n➤ **Type : **"
-    	msg += " ".join(natsorted(doujin.categories))
-    if doujin.parodies:
-    	msg += "\n➤ **Parodies : **"
-    	msg += " ".join(natsorted(doujin.parodies))
-    if doujin.artists:
-    	msg += "\n➤ **Artists : **"
-    	msg += " ".join(natsorted(doujin.artists))''
-    if doujin.languages:
-    	msg += "\n➤ **Languages : **"
-    	msg += " ".join(natsorted(doujin.languages))
-    msg += f"\n➤ **Pages : ** {doujin.pages}"
-    if doujin.tags:
-    	msg += "\n➤ **Tags : **"
-    	msg += " ".join(natsorted(doujin.tags))
-    file = await images_to_pdf(doujin.images, pdfname, dir=doujin.code, headers=dict(Referer=doujin.url))
-    mess = await bot.send_message(chat, msg, link_preview=True)
-    await app.send_document(chat, file, caption="**PDF VIEW**")
-    await bot.send_file(chat, "CAADAQADRwIAArtf8EeIGkF9Fv05gQI")
-    os.remove(file)
-    here = f"[mess.chat.title](https://t.me/c/{mess.chat.id}/{mess.id})"
-    await eor(m, f"**Done Successfully** Sent post in {here}")
+	graph_link = await post_to_telegraph(title, imgs)
+	msg += f"[{title}]({graph_link})\n"
+	msg += f"\n➤ **Code :** {doujin.code}"
+	if doujin.categories:
+		msg += "\n➤ **Type : **"
+		msg += " ".join(natsorted(doujin.categories))
+	if doujin.parodies:
+		msg += "\n➤ **Parodies : **"
+		msg += " ".join(natsorted(doujin.parodies))
+	if doujin.artists:
+		msg += "\n➤ **Artists : **"
+		msg += " ".join(natsorted(doujin.artists))
+	if doujin.languages:
+		msg += "\n➤ **Languages : **"
+		msg += " ".join(natsorted(doujin.languages))
+	msg += f"\n➤ **Pages : ** {doujin.pages}"
+	if doujin.tags:
+		msg += "\n➤ **Tags : **"
+		msg += " ".join(natsorted(doujin.tags))
+	file = await images_to_pdf(doujin.images, pdfname, dir=doujin.code, headers=dict(Referer=doujin.url))
+	mess = await bot.send_message(chat, msg, link_preview=True)
+	await app.send_document(chat, file, caption="**PDF VIEW**")
+	await bot.send_file(chat, "CAADAQADRwIAArtf8EeIGkF9Fv05gQI")
+	os.remove(file)
+	here = f"[mess.chat.title](https://t.me/c/{mess.chat.id}/{mess.id})"
+	await eor(m, f"**Done Successfully** Sent post in {here}")
     	
