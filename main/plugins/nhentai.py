@@ -52,14 +52,14 @@ async def images_to_pdf(images: list, pdfname: str, dir="nhentai", headers=None)
 		name = "./" + dir + "/" + link.split("/")[-1]
 		await fast_download(link, filename=name, headers=headers)
 		image_list.append(name)
-	with open(os.getcwd()+pdfname, "wb") as file:
+	with open(os.getcwd()+"/"+pdfname, "wb") as file:
 		file.write(img2pdf.convert(image_list))
 		file.close()
 	return file.name
 
 @bot.on(admin_cmd(pattern="nh(?: |$)(.*)", allow_sudo=True))
 async def _(event):
-	chat = -1001699010132
+	chat = -1001519487732
 	m = await eor(event, "`Processing ...`")
 	input_str = event.pattern_match.group(1)
 	if not input_str:
