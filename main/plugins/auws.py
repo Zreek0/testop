@@ -108,3 +108,39 @@ def h20():
  match = re.match(ch_regex, ch_input)
  args["ch"] = match.group(1)
  return args
+class nhentai:
+	def __init__(self, link):
+		if "nhentai" in link:
+			link = link
+			code_regex = r"(?:https?://)?(?:www\.)?nhentai\.to/g/(\d+)"
+			code = re.match(code_regex, link).group(1)
+		else:
+			code = link
+			link = f"https://nhentai.to/g/{code}/"
+		response = requests.get(link)
+		soup = BeautifulSoup(response.text, "html.parser")
+		self.title = soup.find("div", id="info").find("h1").text
+		self.tags = []
+		self.artists = []
+		self.parodies = []
+		self.categories = []
+		self.languages = []
+		self.images = []
+		tdata = soup.find_all("a", "tag")
+		for t in tdata:
+			if "tag" in t["href"]:
+				self.tags.append("#"+t.text.replace(" ", "_"))
+			elif "artist" in t["href"]:
+				self.artists.append(t.text.replace(" ", "_"))
+			elif "parody" in t["href"]:
+				self.parodies.append(t.text.replace(" ", "_"))
+			elif "language" in t["href"]:
+				self.languages.append(t.text.replace(" " , "_"))
+			elif "category" in t["href"]:
+				self.categories.append("#"+t.text.replace(" ", "_"))
+		data = soup.find_all("img", "lazyload")
+		for i in data:
+			i = i["data-src"].split("\t")[-1]
+			self.images.append(i.strip())
+			pass
+		self.pages = len(self.images)
