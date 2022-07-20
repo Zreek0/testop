@@ -112,7 +112,7 @@ class nhentai:
 	def __init__(self, link):
 		if "hentai" in link:
 			link = link
-			code_regex = r"(?:https?://)?(?:www\.)?nhentai\.to/g/(\d+)"
+			code_regex = r"(?:https?://)?(?:www\.)?[^.]hentai\.to/g/(\d+)"
 			self.code = re.match(code_regex, link).group(1)
 		else:
 			self.code = code = link
