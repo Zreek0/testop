@@ -142,7 +142,7 @@ class nhentai:
 				self.categories.append("#"+t.text.replace(" ", "_"))
 		data = soup.find_all("img", "lazyload")
 		for i in data:
-			i = i["data-src"].split("\t")[-1]
-			self.images.append(i.strip())
+			i = i["data-src"].split("\t")[-1].replace("t.", ".")
+			self.images.append(i)
 			pass
 		self.pages = len(self.images)
