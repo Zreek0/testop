@@ -131,7 +131,7 @@ class nhentai:
 		tdata = soup.find_all("a", "tag")
 		for t in tdata:
 			if "tag" in t["href"]:
-				self.tags.append("#"+t.text.replace(" ", "_"))
+				self.tags.append("#"+t.text.replace(" ", "_").replace("-", "_"))
 			elif "artist" in t["href"]:
 				self.artists.append(t.text.replace(" ", "_"))
 			elif "parody" in t["href"]:
