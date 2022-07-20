@@ -55,6 +55,7 @@ async def images_to_pdf(images: list, pdfname: str, dir="nhentai", headers=None)
 	with open(os.getcwd()+"/"+pdfname, "wb") as file:
 		file.write(img2pdf.convert(image_list))
 		file.close()
+	shutil.rmtree(dir)
 	return file.name
 
 @bot.on(admin_cmd(pattern="nh(?: |$)(.*)", allow_sudo=True))
