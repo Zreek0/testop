@@ -98,6 +98,6 @@ async def _(event):
 	await app.send_document(chat, file, caption="**PDF VIEW**")
 	await bot.send_file(chat, "CAADAQADRwIAArtf8EeIGkF9Fv05gQI")
 	os.remove(file)
-	here = f"[mess.chat.title](https://t.me/c/{mess.chat.id}/{mess.id})"
+	here = f"[{mess.chat.title}](https://t.me/c/{mess.chat.id}/{mess.id})"
 	await eor(m, f"**Done Successfully** Sent post in {here}")
     	
