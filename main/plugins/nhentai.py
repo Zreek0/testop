@@ -73,7 +73,7 @@ async def _(event):
 	imgs =  "".join(f"<img src='{url}'/>" for url in doujin.images)
 	title = doujin.title
 	nn = title.split("|")
-    pdfname = nn[0].strip() + " @Adult_Mangas.pdf" if len(nn) > 1 else nn[0] + ".pdf"
+	pdfname = nn[0].strip() + " @Adult_Mangas.pdf" if len(nn) > 1 else nn[0] + ".pdf"
     graph_link = await post_to_telegraph(title, imgs)
     msg += f"[{title}]({graph_link})\n"
     msg += f"\n➤ **Code :** {doujin.code}"
