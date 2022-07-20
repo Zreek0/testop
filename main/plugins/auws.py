@@ -113,9 +113,9 @@ class nhentai:
 		if "nhentai" in link:
 			link = link
 			code_regex = r"(?:https?://)?(?:www\.)?nhentai\.to/g/(\d+)"
-			code = re.match(code_regex, link).group(1)
+			self.code = re.match(code_regex, link).group(1)
 		else:
-			code = link
+			self.code = link
 			link = f"https://nhentai.to/g/{code}/"
 		response = requests.get(link)
 		response.raise_for_status()
