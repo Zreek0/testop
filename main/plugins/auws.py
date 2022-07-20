@@ -118,6 +118,7 @@ class nhentai:
 			code = link
 			link = f"https://nhentai.to/g/{code}/"
 		response = requests.get(link)
+		response.raise_for_status()
 		soup = BeautifulSoup(response.text, "html.parser")
 		self.title = soup.find("div", id="info").find("h1").text
 		self.tags = []
