@@ -90,7 +90,7 @@ async def _(event):
 	if doujin.languages:
 		msg += "\n➤ **Languages : **"
 		msg += " ".join(natsorted(doujin.languages))
-	msg += f"\n➤ **Pages : ** {doujin.pages}"
+	msg += f"\n➤ **Pages :** {doujin.pages}"
 	if doujin.tags:
 		msg += "\n➤ **Tags : **"
 		msg += " ".join(natsorted(doujin.tags))
