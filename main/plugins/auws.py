@@ -88,8 +88,8 @@ async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src")
 			os.rename("mydoc.pdf", pdfname)
 			logging.info(err)
 		except:
+			raise
 			shutil.rmtree(upr)
-			raise 
 	shutil.rmtree(upr)
 	return pdfname
 
