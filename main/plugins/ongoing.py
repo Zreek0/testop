@@ -37,7 +37,6 @@ async def _uws(event):
 	mess = await eor(event, "`Processing...`")
 	if not input_str or not len(splited) >=2:
 		await eod(mess, "`Sorry, invalid syntax`")
-		return
 	if input_str.strip().startswith("-"):
 		name = pnames[int(splited[1])]
 		wname = name.lower().replace(" ", "-").replace("'", "").replace(",", "").replace("’", "").replace("?", "").replace("!", "")
@@ -80,7 +79,6 @@ async def _uws(event):
 			await eod(mess, f"**Successfully uploaded** [{name.title()} - Chapter {ch}]({link})")
 		except Exception as e:
 			await eod(mess, f"**Error :** {str(e)}")
-		return
 	else:
 		name = pnames[int(splited[0])]
 		wname = name.lower().replace(" ", "-").replace("'", "").replace(",", "").replace("’", "").replace("?", "").replace("!", "")
