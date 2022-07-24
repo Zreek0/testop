@@ -21,3 +21,4 @@ natsort
 reportlab
 pdfkit
 aiofiles
+PyMuPdf 
