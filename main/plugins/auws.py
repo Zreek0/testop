@@ -11,6 +11,7 @@ import cloudscraper
 import img2pdf
 import glob
 import logging
+import fitz
 request = requests.Session()
 import undetected_chromedriver as uc
 from concurrent.futures import ThreadPoolExecutor
@@ -148,3 +149,10 @@ class nhentai:
 			self.images.append(i)
 			pass
 		self.pages = len(self.images)
+def merge_pdfs(pdflist: list, pdfname):
+	result = fitz.open()
+	for pdf in pdflist:
+		with fitz.open(pdf) as file:
+			result.insert_pdf(file)
+	result.save(pdfname)
+	return pdfname
