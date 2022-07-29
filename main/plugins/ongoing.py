@@ -22,7 +22,7 @@ def get_link(link, cloud=None):
 
 def h20_search(name):
 	scraper = cloudscraper.create_scraper()
-	r = requests.get(f"https://hentai20.com/?s={name}&post_type=wp-manga")
+	r = scraper.get(f"https://hentai20.com/?s={name}&post_type=wp-manga")
 	soup = BeautifulSoup(r.text, "html.parser")
 	data = soup.find("h3", "h4")
 	if not "wp-manga" in r.url:
