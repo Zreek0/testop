@@ -8,8 +8,8 @@ def get_plist():
 	data = dict()
 	ids1 = list(range(2, 201))
 	ids2 = list(range(201, int(gvarstatus("MID"))))
-	mess1 = await app.get_messages("adult_mangas", message_ids=ids1)
-	mess2 = await app.get_messages("adult_mangas", message_ids=ids2)
+	mess1 = app.get_messages("adult_mangas", message_ids=ids1)
+	mess2 = app.get_messages("adult_mangas", message_ids=ids2)
 	mess = mess1 + mess2
 	for m in mess:
 		if m.caption and m.caption_entities and "releasing" in m.caption.lower():
