@@ -95,10 +95,15 @@ async def _(event):
 		msg += "\n➤ **Tags : **"
 		msg += " ".join(natsorted(doujin.tags))
 	file = await images_to_pdf(doujin.images, pdfname, dir=doujin.code, headers=dict(Referer=doujin.url))
+	graph_post = msg.split("\n")[0]
+	await eor(m, graph_post, link_preview=True)
+	graph_link = await post_to_telegraph(title, imgs)
+	graph_post = f"[{title}]({graph_link})"
+	msg = msg.replace(msg.split("\n")[0], graph_post)
 	mess = await bot.send_message(chat, msg, link_preview=True)
 	await app.send_document(chat, file, caption="**PDF VIEW**")
 	await bot.send_file(chat, "CAADAQADRwIAArtf8EeIGkF9Fv05gQI")
 	os.remove(file)
 	here = f"[{mess.chat.title}](https://t.me/c/{mess.chat.id}/{mess.id})"
-	await eor(m, f"**Done Successfully** Sent post in {here}")
+	await eor(m, f"**Done Successfully** Sent  in {here}")
     	
