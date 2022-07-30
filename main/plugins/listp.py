@@ -31,5 +31,5 @@ async def getplist(event):
 		else:
 			n += 1
 			post += f"{n-1}.] [{i}]({plist[i]})\n"
-	await eor(event, post)
+	await eor(e, post)
 	
