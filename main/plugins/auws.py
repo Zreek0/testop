@@ -30,7 +30,7 @@ def get_names():
 	for m in mess:
 		if m.photo and m.caption and "releasing" in m.caption.lower():
 			names.append(m.caption.split("\n")[0].split(" | ")[0].strip())
-	return names
+	return sorted(names)
 
 def create_pdf(path, images: list):
 	pdf = canvas.Canvas(path)
