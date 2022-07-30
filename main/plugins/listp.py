@@ -1,6 +1,7 @@
 import re
 from . import *
 from telethon import events
+from .ongoing import pnames
 from ..sql.globals import gvarstatus
 
 def get_plist():
