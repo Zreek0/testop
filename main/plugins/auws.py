@@ -29,7 +29,7 @@ def get_names():
 	mess = mess1 + mess2
 	for m in mess:
 		if m.photo and m.caption and "releasing" in m.caption.lower():
-			names.append(m.caption.split("\n")[0].split(" | ")[0])
+			names.append(m.caption.split("\n")[0].split(" | ")[0].strip())
 	return names
 
 def create_pdf(path, images: list):
