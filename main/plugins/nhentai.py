@@ -100,9 +100,11 @@ async def _(event):
 	graph_link = await post_to_telegraph(title, imgs)
 	graph_post = f"[{title}]({graph_link})"
 	msg = msg.replace(msg.split("\n")[0], graph_post)
+	temp_msg = await bot.send_message(-1001783376856, graph_link, link_preview=True)
 	mess = await bot.send_message(chat, msg, link_preview=True)
 	await app.send_document(chat, file, caption="**PDF VIEW**")
 	await bot.send_file(chat, "CAADAQADRwIAArtf8EeIGkF9Fv05gQI")
+	await temp_msg.delete()
 	os.remove(file)
 	here = f"[{mess.chat.title}](https://t.me/c/{mess.chat.id}/{mess.id})"
 	await eor(m, f"**Done Successfully** Sent  in {here}")
