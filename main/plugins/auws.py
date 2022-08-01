@@ -71,7 +71,10 @@ async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src")
 		r = requests.get(link)
 		r.raise_for_status()
 	soup = BeautifulSoup(r.text, "html.parser")
-	image_links = soup.find_all("img", class_, **{src: True})
+	if "hentai20" in link:
+		image_links = soup.find_all("img", class_, **{src: True})
+	else:
+		image_links = soup.find_all("img", class_)
 	n = 0
 	images = []
 	for i in image_links:
