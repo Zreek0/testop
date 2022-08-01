@@ -53,7 +53,7 @@ def create_pdf(path, images: list):
 
 	pdf.save()
 
-async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src"):
+async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src", **args):
 	chno = str(chapter)
 	chno = chno.replace("-", ".")
 	pdfname = f"./Chapter {chno} {name}" + " @Adult_Mangas.pdf"
@@ -71,7 +71,7 @@ async def post_ws(link, name, chapter, class_="wp-manga-chapter-img", src="src")
 		r = requests.get(link)
 		r.raise_for_status()
 	soup = BeautifulSoup(r.text, "html.parser")
-	image_links = soup.find_all("img", class_)
+	image_links = soup.find_all("img", class_, **args)
 	n = 0
 	images = []
 	for i in image_links:
